@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>fieldpal.ai - AI Solutions for Frontline Workers</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;700&family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-weight: 300;
+            line-height: 1.6;
+            color: #383838;
+            background-color: #ffffff;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-weight: 700;
+            color: #020202;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: #ffffff;
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #E04F00;
+        }
+
+        .logo img {
+            height: 120px;
+            width: auto;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #E04F00;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 6rem 0;
+            text-align: center;
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: #1a1a1a;
+            line-height: 1.2;
+        }
+
+        .hero .subtitle {
+            font-size: 3.5rem;
+            color: #666;
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+
+        .hero .tagline {
+            font-size: 1.2rem;
+            color: #E04F00;
+            font-weight: 600;
+            margin-bottom: 3rem;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: #E04F00;
+            color: white;
+            padding: 1rem 2rem;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(224, 79, 0, 0.3);
+        }
+
+        .cta-button:hover {
+            background: #c64700;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(224, 79, 0, 0.4);
+        }
+
+        /* Challenges Section */
+        .challenges {
+            padding: 6rem 0;
+            background: #ffffff;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 1rem;
+        }
+
+        .section-header p {
+            font-size: 1.2rem;
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .challenges-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .challenge-card {
+            background: #f8f9fa;
+            padding: 2rem;
+            border-radius: 12px;
+            border-left: 4px solid #E04F00;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .challenge-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .challenge-card h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .challenge-card .icon {
+            font-size: 1.5rem;
+            color: #E04F00;
+        }
+
+        .challenge-card p {
+            color: #666;
+            line-height: 1.7;
+        }
+
+        /* Technology Section */
+        .technology {
+            padding: 6rem 0;
+            background: #f8f9fa;
+        }
+
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .tech-card {
+            background: #ffffff;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-top: 4px solid #E04F00;
+        }
+
+        .tech-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        .tech-card h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .tech-card .icon {
+            font-size: 1.5rem;
+            color: #E04F00;
+        }
+
+        .tech-card p {
+            color: #666;
+            line-height: 1.7;
+        }
+
+        /* Team Section */
+        .team {
+            padding: 6rem 0;
+            background: #ffffff;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .team-card {
+            background: #f8f9fa;
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .team-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .team-card img {
+            width: 120px;
+            height: 120px;
+            border-radius: 8px;
+            object-fit: cover;
+            margin-bottom: 1rem;
+        }
+
+        .team-card h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 0.5rem;
+        }
+
+        .team-card .title {
+            font-size: 1rem;
+            color: #E04F00;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .team-card .linkedin {
+            margin-bottom: 1rem;
+        }
+
+        .team-card .linkedin a {
+            color: #0077b5;
+            font-size: 1.2rem;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .team-card .linkedin a:hover {
+            color: #005885;
+        }
+
+        .team-card p {
+            color: #666;
+            line-height: 1.7;
+            font-size: 0.95rem;
+        }
+
+        .team-section-divider {
+            margin: 4rem 0;
+            border: none;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #E04F00, transparent);
+        }
+
+        /* Footer */
+        footer {
+            background: #1a1a1a;
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .footer-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #E04F00;
+        }
+
+        .footer-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: #E04F00;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero .subtitle {
+                font-size: 1.2rem;
+            }
+
+            .section-header h2 {
+                font-size: 2rem;
+            }
+
+            .challenges-grid,
+            .tech-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+        .delay-4 { animation-delay: 0.4s; }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <img src="images/fieldpal.png" alt="FieldPal.ai Logo">
+                </div>
+                <ul class="nav-links">
+                    <li><a href="#challenges">Challenges</a></li>
+                    <li><a href="#technology">Technology</a></li>
+                    <li><a href="#team">Team</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1 class="fade-in-up">The interface that isn't.</h1>
+            <p class="subtitle fade-in-up delay-1">Building ChatGPT style solutions for Frontline Workers.</p>
+            <a href="mailto:info@fieldpal.ai" class="cta-button fade-in-up delay-3">Get Started</a>
+        </div>
+    </section>
+
+    <!-- Challenges Section -->
+    <section id="challenges" class="challenges">
+        <div class="container">
+            <div class="section-header fade-in-up">
+                <h2>The Critical Challenges Facing Field-Heavy Enterprises</h2>
+                <p>Industrial companies face unprecedented challenges that require innovative AI solutions</p>
+            </div>
+            
+            <div class="challenges-grid">
+                <div class="challenge-card fade-in-up delay-1">
+                    <h3><i class="fas fa-clock icon"></i>Asset Uptime Crisis</h3>
+                    <p>Unplanned downtime costs industrial companies millions annually. Each hour of equipment failure leads to cascading losses in production, resources, and customer satisfaction.</p>
+                </div>
+                
+                <div class="challenge-card fade-in-up delay-2">
+                    <h3><i class="fas fa-brain icon"></i>Expertise Exodus</h3>
+                    <p>An aging workforce is retiring at unprecedented rates, taking decades of irreplaceable knowledge with them. Companies struggle to transfer this expertise to a new generation with different learning styles.</p>
+                </div>
+                
+                <div class="challenge-card fade-in-up delay-3">
+                    <h3><i class="fas fa-puzzle-piece icon"></i>Knowledge Fragmentation</h3>
+                    <p>Critical operational data remains buried in thousands of PDFs, legacy spreadsheets, and siloed tribal knowledge inaccessible precisely when field workers need it most.</p>
+                </div>
+                
+                <div class="challenge-card fade-in-up delay-4">
+                    <h3><i class="fas fa-clipboard-check icon"></i>Compliance Complexity</h3>
+                    <p>Safety and regulatory requirements grow increasingly stringent, with catastrophic financial and reputational consequences for non-compliance.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technology Section -->
+    <section id="technology" class="technology">
+        <div class="container">
+            <div class="section-header fade-in-up">
+                <h2>Our Technological Edge</h2>
+                <p>Cutting-edge AI solutions designed specifically for frontline workers</p>
+            </div>
+            
+            <div class="tech-grid">
+                <div class="tech-card fade-in-up delay-1">
+                    <h3><i class="fas fa-puzzle-piece icon"></i>Micro-indexing Technology</h3>
+                    <p>Proprietary system transforms dense technical content into bite-sized, instantly searchable knowledge nodes. We've built the equivalent of Google's SEO engine for your internal operational content.</p>
+                </div>
+                
+                <div class="tech-card fade-in-up delay-2">
+                    <h3><i class="fas fa-user icon"></i>Human-Centered Design</h3>
+                    <p>Our interfaces adapt to workers' natural behaviours, not the other way around. We meet field teams where they are, with intuitive interaction patterns that require minimal training.</p>
+                </div>
+                
+                <div class="tech-card fade-in-up delay-3">
+                    <h3><i class="fas fa-brain icon"></i>Contextual Intelligence</h3>
+                    <p>Our AI connects disparate legacy systems, extracting meaning even from fragmented operational technology data. We bridge information silos that have persisted for decades.</p>
+                </div>
+                
+                <div class="tech-card fade-in-up delay-4">
+                    <h3><i class="fas fa-code icon"></i>API-First Platform</h3>
+                    <p>Built as an extensible platform for developers to create specialised applications. Microsoft AI partnership positions us for seamless integration with Copilot and Dynamics ecosystems.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section id="team" class="team">
+        <div class="container">
+            <div class="section-header fade-in-up">
+                <h2>Experienced Team</h2>
+                <p>Meet the founders and strategic advisors behind fieldpal.ai</p>
+            </div>
+            
+            <div class="team-grid">
+                <!-- Founding Team -->
+                <div class="team-card fade-in-up delay-1">
+                    <img src="images/james-woodall.jpeg" alt="James Woodall">
+                    <h3>James Woodall</h3>
+                    <div class="title">Co-founder & CEO</div>
+                    <div class="linkedin">
+                        <a href="https://www.linkedin.com/in/jameswoodall/" target="_blank">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                    </div>
+                    <p>Visionary with 20+ years of experience in enterprise software and AI development, previously scaling a B2B SaaS startup to over m+ARR and spent the last 3 years in a series C scale up as VP Software Engineering. 6 approved patents.</p>
+                </div>
+                
+                <div class="team-card fade-in-up delay-2">
+                    <img src="images/fergus-kidd.jpeg" alt="Fergus Kidd">
+                    <h3>Fergus Kidd</h3>
+                    <div class="title">Co-founder & CTO</div>
+                    <div class="linkedin">
+                        <a href="https://www.linkedin.com/in/fergus-kidd-1a222667/" target="_blank">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                    </div>
+                    <p>Deep expertise in machine learning and data architecture, having led RnD engineering teams at Accenture/Avanade and developed AI solutions for industrial applications. Well equipped to help customers deliver outcomes. 1 approved patent. Microsoft MVP.</p>
+                </div>
+                
+                <div class="team-card fade-in-up delay-3">
+                    <img src="images/mr-x.png" alt="Mr X">
+                    <h3>Mr X</h3>
+                    <div class="title">Co-founder & CSO</div>
+                    <p>20+ years in enterprise solution selling, former founder & CSO at UK based SaaS start-up, former leader at US Series C scale up. Innovator with a strong commercial background with experience across Product, Marketing & Strategic Partnerships. Currently in stealth mode.</p>
+                </div>
+            </div>
+            
+            <hr class="team-section-divider">
+            
+            <div class="team-grid">
+                <!-- Strategic Advisors -->
+                <div class="team-card fade-in-up delay-1">
+                    <img src="images/jan-junker.jpeg" alt="Jan Junker">
+                    <h3>Jan Junker</h3>
+                    <div class="title">Strategic Advisor</div>
+                    <div class="linkedin">
+                        <a href="https://www.linkedin.com/in/jan-junker-74743625/" target="_blank">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                    </div>
+                    <p>Former CCO of Ubimax. Successfully Exited to TeamViewer. MBA.</p>
+                </div>
+                
+                <div class="team-card fade-in-up delay-2">
+                    <img src="images/lee-maughan.jpeg" alt="Lee Maughan">
+                    <h3>Lee Maughan</h3>
+                    <div class="title">Advisor and Fractional CFO</div>
+                    <div class="linkedin">
+                        <a href="https://www.linkedin.com/in/leemaughan/" target="_blank">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                    </div>
+                    <p>Experienced business leader with the core financial skills required to run the business.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">fieldpal.ai</div>
+                <ul class="footer-links">
+                    <li><a href="#challenges">Challenges</a></li>
+                    <li><a href="#technology">Technology</a></li>
+                    <li><a href="mailto:contact@fieldpal.ai">Contact</a></li>
+                </ul>
+            </div>
+            <p style="margin-top: 2rem; color: #999;">© 2025 fieldpal.ai sightline.ai. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all elements with fade-in-up class
+        document.querySelectorAll('.fade-in-up').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.8s ease-out, transform 0.8s ease-out';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
