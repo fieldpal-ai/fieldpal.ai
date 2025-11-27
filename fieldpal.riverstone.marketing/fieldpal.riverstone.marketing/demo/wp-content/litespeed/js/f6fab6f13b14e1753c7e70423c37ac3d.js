@@ -1,0 +1,3 @@
+(function($){"use strict";var circilarTextHandler=function($scope){let elements=$scope.find('.pxl-circular-text-item.is-text');if(!elements.length)return;elements.each(function(){let circletext=new CircleType(this)
+circletext.forceHeight(!0).forceWidth(!0)})};$(window).on('elementor/frontend/init',function(){elementorFrontend.hooks.addAction('frontend/element_ready/pxl_circular_text.default',function($scope){circilarTextHandler($scope)});elementorFrontend.hooks.addAction('frontend/element_ready/pxl_test.default',function($scope){circilarTextHandler($scope)})})})(jQuery)
+;
