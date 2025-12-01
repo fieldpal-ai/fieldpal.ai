@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}FieldPal.ai{% endblock %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/brand.css">
+    {% block extra_head %}{% endblock %}
+</head>
+<body class="bg-white">
+    <nav class="bg-white shadow-lg border-b border-light-grey">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex">
+                    <div class="flex-shrink-0 flex items-center">
+                        <a href="/" class="flex items-center">
+                            <img src="/static/images/FP-Logo-LightBg.svg" alt="FieldPal.ai" class="h-8 md:h-10">
+                        </a>
+                    </div>
+                    <div class="hidden sm:ml-6 sm:flex sm:space-x-8">
+                        <a href="/" class="border-transparent text-space-black hover:border-accent hover:text-accent inline-flex items-center px-1 pt-1 border-b-2 body-md font-medium">
+                            Home
+                        </a>
+                        <a href="/about" class="border-transparent text-space-black hover:border-accent hover:text-accent inline-flex items-center px-1 pt-1 border-b-2 body-md font-medium">
+                            About
+                        </a>
+                        <a href="/contact" class="border-transparent text-space-black hover:border-accent hover:text-accent inline-flex items-center px-1 pt-1 border-b-2 body-md font-medium">
+                            Contact
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="bg-space-black text-white mt-12">
+        <div class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
+            <div class="border-t border-light-grey pt-6">
+                <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                    <div class="flex items-center gap-5">
+                        <span class="label uppercase letter-spacing-md text-white">Brand Identity</span>
+                        <div class="w-4 h-px bg-light-grey"></div>
+                        <span class="label uppercase letter-spacing-md text-white">Typography</span>
+                        <div class="w-4 h-px bg-light-grey"></div>
+                        <span class="label uppercase letter-spacing-md text-white">Colour Palette</span>
+                    </div>
+                    <p class="body-md text-white">&copy; 2024 FieldPal.ai. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    {% block extra_scripts %}{% endblock %}
+</body>
+</html>
+

@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}Login Error - Admin{% endblock %}
+
+{% block content %}
+<div class="max-w-2xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+    <div class="bg-white shadow rounded-lg p-8">
+        <h1 class="text-2xl font-bold text-red-600 mb-4">Login Error</h1>
+        <p class="text-gray-700 mb-6">{{ error }}</p>
+        <a href="/admin/login" class="text-blue-600 hover:text-blue-800">Try again</a>
+    </div>
+</div>
+{% endblock %}
+

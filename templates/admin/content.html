@@ -1,0 +1,105 @@
+{% extends "admin/base.html" %}
+
+{% block title %}Content Management - Admin{% endblock %}
+
+{% block content %}
+<div class="bg-white shadow rounded-lg p-6">
+    <h1 class="text-2xl font-bold text-gray-900 mb-6">Content Management</h1>
+    
+    <div class="space-y-4">
+        <div class="border rounded-lg p-4">
+            <h3 class="text-lg font-semibold mb-2">Home Page</h3>
+            <button onclick="loadContent('home')" class="text-blue-600 hover:text-blue-800">Edit</button>
+        </div>
+        
+        <div class="border rounded-lg p-4">
+            <h3 class="text-lg font-semibold mb-2">About Page</h3>
+            <button onclick="loadContent('about')" class="text-blue-600 hover:text-blue-800">Edit</button>
+        </div>
+        
+        <div class="border rounded-lg p-4">
+            <h3 class="text-lg font-semibold mb-2">Contact Page</h3>
+            <button onclick="loadContent('contact')" class="text-blue-600 hover:text-blue-800">Edit</button>
+        </div>
+    </div>
+    
+    <div id="editor" class="hidden mt-6">
+        <div class="mb-4 p-4 bg-gray-50 rounded border">
+            <h4 class="font-semibold mb-2">Content Structure Examples:</h4>
+            <div class="text-sm space-y-2">
+                <div><strong>Home page:</strong> <code>{"title": "Welcome to FieldPal.ai", "subtitle": "Your solution", "features": [{"title": "Feature 1", "description": "Description"}]}</code></div>
+                <div><strong>About page:</strong> <code>{"title": "About Us", "body": "&lt;p&gt;HTML content here&lt;/p&gt;"}</code></div>
+                <div><strong>Contact page:</strong> <code>{"title": "Contact Us", "intro": "&lt;p&gt;Get in touch&lt;/p&gt;"}</code></div>
+            </div>
+        </div>
+        <textarea id="contentEditor" class="w-full h-96 border rounded p-4 font-mono text-sm"></textarea>
+        <button onclick="saveContent()" class="mt-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">Save</button>
+    </div>
+</div>
+
+<script>
+let currentPage = null;
+
+// Helper function to get cookie value
+function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
+    return null;
+}
+
+async function loadContent(page) {
+    currentPage = page;
+    try {
+        const response = await fetch(`/api/content/${page}`, {
+            credentials: 'include'  // Include cookies
+        });
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+        document.getElementById('contentEditor').value = JSON.stringify(data, null, 2);
+        document.getElementById('editor').classList.remove('hidden');
+    } catch (error) {
+        console.error('Error loading content:', error);
+        alert('Error loading content: ' + error.message);
+    }
+}
+
+async function saveContent() {
+    if (!currentPage) return;
+    
+    try {
+        const content = JSON.parse(document.getElementById('contentEditor').value);
+        const token = getCookie('auth_token');
+        
+        const headers = {
+            'Content-Type': 'application/json'
+        };
+        
+        // Add Authorization header if token exists in cookie
+        if (token) {
+            headers['Authorization'] = `Bearer ${token}`;
+        }
+        
+        const response = await fetch(`/api/content/${currentPage}`, {
+            method: 'PUT',
+            headers: headers,
+            credentials: 'include',  // Include cookies
+            body: JSON.stringify(content)
+        });
+        
+        if (response.ok) {
+            alert('Content saved successfully!');
+        } else {
+            const errorText = await response.text();
+            throw new Error(`HTTP ${response.status}: ${errorText}`);
+        }
+    } catch (error) {
+        console.error('Error saving content:', error);
+        alert('Error saving content: ' + error.message);
+    }
+}
+</script>
+{% endblock %}
+

@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}About - FieldPal.ai{% endblock %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+    <div class="bg-white shadow rounded-md border border-light-grey p-8">
+        {% if content and content.title %}
+        <h1 class="h1 text-space-black mb-6">{{ content.title | safe }}</h1>
+        {% else %}
+        <h1 class="h1 text-space-black mb-6">About FieldPal.ai</h1>
+        {% endif %}
+        
+        <div class="prose max-w-none">
+            {% if content and content.body %}
+            {{ content.body | safe }}
+            {% else %}
+            <p class="body-lg text-space-black mb-4">
+                FieldPal.ai is a modern solution for field management, designed to help you manage your operations efficiently.
+            </p>
+            <p class="body-lg text-space-black mb-4">
+                Our mission is to provide intelligent tools that make field management easier and more effective.
+            </p>
+            <h2 class="h2 text-space-black mt-8 mb-4">Our Team</h2>
+            <p class="body-lg text-space-black">
+                We're a dedicated team working to bring you the best field management experience.
+            </p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+

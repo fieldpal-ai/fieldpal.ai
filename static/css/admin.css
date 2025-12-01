@@ -1,0 +1,10 @@
+/* Admin panel custom styles */
+
+/* Admin panels use brand colors */
+.admin-card {
+    background: white;
+    border: 1px solid #DEDEDE;
+    border-radius: 20px;
+    padding: 1.5rem;
+}
+

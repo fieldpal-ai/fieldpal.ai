@@ -1,0 +1,12 @@
+config:
+  fieldpal-ai:location: UK South
+  fieldpal-ai:project_name: fieldpal-ai-website
+  fieldpal-ai:auth0_domain: kmp-sightline.uk.auth0.com
+  fieldpal-ai:auth0_audience: https://kmp-sightline.uk.auth0.com/api/v2/
+  fieldpal-ai:auth0_client_id: 7dLvsQud14cbMAhSq0btf2kPTeu0oKHF
+  fieldpal-ai:auth0_callback_url: http://localhost:8003/auth/callback
+  fieldpal-ai:auth0_client_secret:
+    secure: AAABAGI5aa7xcgHMnNqCTGbVWj96QTWz5KgppufTT7Xx8iX7D58eiSk3qkTG2ZRcjL86jr5a70etsqqLwFJk/eXKMKDENlxHqr2/wQcVdvtZ+mTyAXK01WKqtN0FKbQ/
+  fieldpal-ai:posthog_host: https://us.i.posthog.com
+  fieldpal-ai:posthog_project_api_key:
+    secure: AAABAMtbINJmDyRnPZooxySJJ3vD/f+jmlrjyTq+GweVljZvuHNENtpGT9UG4iDHaA+9/+hkN8t51NU/SAlMzLPOv8CUqbxJrm7UTbYpKA==

@@ -1,0 +1,271 @@
+/* Brand Guidelines - FieldPal.ai */
+
+/* Import Figtree font */
+@import url('https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap');
+
+/* Apply brand font to body */
+body {
+    font-family: var(--font-primary);
+}
+
+/* Brand Colors */
+:root {
+    /* Primary Colors */
+    --color-space-black: #2D2D2D;
+    --color-space-black-dark: #001208;
+    --color-accent: #E04F00;
+    --color-white: #FFFFFF;
+    --color-space-grey: #FAF9F8;
+    
+    /* Grey Scale */
+    --color-grey-50: #FAF9F8;
+    --color-grey-100: #F2F0EF;
+    --color-grey-200: #E6E3E1;
+    --color-grey-300: #D4D0CD;
+    --color-grey-400: #B8B1AE;
+    --color-grey-500: #958D8A;
+    --color-grey-600: #726A67;
+    --color-grey-700: #4E4947;
+    --color-grey-800: #2F2A28;
+    
+    /* Supporting Colors */
+    --color-light-grey: #DEDEDE;
+    
+    /* Typography */
+    --font-primary: 'Figtree', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-heading: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-brand: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    
+    /* Border Radius */
+    --radius-sm: 20px;
+    --radius-md: 40px;
+}
+
+/* Typography Scale */
+body {
+    font-family: var(--font-primary);
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 120%;
+    color: var(--color-space-black);
+    background: var(--color-white);
+}
+
+/* Display - Large Heading */
+.display {
+    font-family: var(--font-primary);
+    font-weight: 600;
+    font-size: 48px;
+    line-height: 120%;
+    color: #000000;
+}
+
+/* H1 */
+h1, .h1 {
+    font-family: var(--font-primary);
+    font-weight: 700;
+    font-size: 56px;
+    line-height: 120%;
+    color: var(--color-space-black);
+}
+
+/* H1 Large */
+.h1-large {
+    font-family: var(--font-primary);
+    font-weight: 600;
+    font-size: 70px;
+    line-height: 120%;
+    color: var(--color-space-black);
+}
+
+/* H2 */
+h2, .h2 {
+    font-family: var(--font-primary);
+    font-weight: 600;
+    font-size: 22px;
+    line-height: 120%;
+    color: #000000;
+}
+
+/* H3 */
+h3, .h3 {
+    font-family: var(--font-primary);
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 120%;
+    color: #000000;
+}
+
+/* H4 */
+h4, .h4 {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 29px;
+    letter-spacing: 0.4px;
+}
+
+/* Body Large */
+.body-lg {
+    font-family: var(--font-primary);
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 120%;
+    color: #000000;
+}
+
+/* Body Medium */
+body, .body-md {
+    font-family: var(--font-primary);
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 120%;
+    color: #000000;
+}
+
+/* Body Small */
+.body-sm {
+    font-family: var(--font-primary);
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 120%;
+    color: #000000;
+}
+
+/* UI Labels */
+.label {
+    font-family: var(--font-primary);
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 120%;
+    color: #000000;
+}
+
+/* Buttons */
+.button-text {
+    font-family: var(--font-primary);
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 120%;
+    color: #000000;
+}
+
+/* Captions */
+.caption {
+    font-family: var(--font-primary);
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 120%;
+    color: #000000;
+}
+
+/* Brand Name */
+.brand-name {
+    font-family: var(--font-brand);
+    font-weight: 600;
+    font-size: 108.891px;
+    line-height: 133px;
+    color: var(--color-white);
+}
+
+/* Brand Guidelines Text */
+.brand-guidelines-text {
+    font-family: var(--font-brand);
+    font-weight: 600;
+    font-size: 110px;
+    line-height: 134px;
+    color: var(--color-accent);
+}
+
+/* Font Weight Variants */
+.font-light {
+    font-weight: 300;
+}
+
+.font-normal {
+    font-weight: 400;
+}
+
+.font-medium {
+    font-weight: 500;
+}
+
+.font-semibold {
+    font-weight: 600;
+}
+
+.font-bold {
+    font-weight: 700;
+}
+
+.font-extrabold {
+    font-weight: 800;
+}
+
+/* Color Utilities */
+.text-space-black {
+    color: var(--color-space-black);
+}
+
+.text-space-black-dark {
+    color: var(--color-space-black-dark);
+}
+
+.text-accent {
+    color: var(--color-accent);
+}
+
+.bg-space-black {
+    background-color: var(--color-space-black);
+}
+
+.bg-accent {
+    background-color: var(--color-accent);
+}
+
+.bg-space-grey {
+    background-color: var(--color-space-grey);
+}
+
+.bg-white {
+    background-color: var(--color-white);
+}
+
+/* Border Utilities */
+.border-light-grey {
+    border-color: var(--color-light-grey) !important;
+}
+
+.border-b.border-light-grey {
+    border-bottom-color: var(--color-light-grey) !important;
+}
+
+/* Border Radius */
+.rounded-sm {
+    border-radius: var(--radius-sm);
+}
+
+.rounded-md {
+    border-radius: var(--radius-md);
+}
+
+/* Letter Spacing */
+.letter-spacing-sm {
+    letter-spacing: 0.4px;
+}
+
+.letter-spacing-md {
+    letter-spacing: 0.6px;
+}
+
+.letter-spacing-lg {
+    letter-spacing: 2px;
+}
+
+/* Uppercase Text */
+.uppercase {
+    text-transform: uppercase;
+}
+
