@@ -1,0 +1,8 @@
+(function($){"use strict";function ainusElAfterRender(){let _elementor=typeof elementor!='undefined'?elementor:elementorFrontend;_elementor.hooks.addFilter('pxl_element_container/after-render',function(ouput,settings){})}
+function ainusElBeforeRender(){let _elementor=typeof elementor!='undefined'?elementor:elementorFrontend;_elementor.hooks.addFilter('pxl_element_container/before-render',function(ouput,settings){if(typeof settings.pxl_background_background!='undefined'||typeof settings.pxl_background_gradient!='undefined'||typeof settings.pxl_background_video!='undefined'){ouput+='<div class="e-con-background"></div>'}
+if(typeof settings.el_number_layer_overlay!='undefined'&&settings.el_number_layer_overlay=='1'){ouput+=`<div class="e-con-overlay"></div>`}
+if(typeof settings.el_overlays!='undefined'&&settings.el_overlays.length>0){settings.el_overlays.forEach(function(item){let classes='e-con-overlay elementor-repeater-item-'+item._id;ouput+=`<div class="${classes}"></div>`})}
+return ouput})}
+function pinElement(){const pinItems=$('.pin-item');if(!pinItems.length)return;let sumHeight=0;pinItems.each(function(i,item){sumHeight+=$(item).outerHeight(!0);let tl=gsap.timeline();tl.to(item,{scrollTrigger:{trigger:item,start:'top top',end:`+=${sumHeight - (sumHeight/(pinItems.length - i))}px `,scrub:!0,pin:!0,}})})}
+$(window).on('elementor/frontend/init',function(){ainusElAfterRender();ainusElBeforeRender();pinElement()})})(jQuery)
+;

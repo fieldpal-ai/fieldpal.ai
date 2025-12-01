@@ -1,0 +1,3 @@
+(function($){"use strict";function setClassForLinkFromDataLink(){let els=$('.pxl-text-editor-wrapper');if(!els.length)return;els.each(function(i,el){const dataLink=$(el).data().link;const linkElement=$(el).find('a');if(!linkElement.length)return;$(linkElement).addClass(dataLink.style+' '+dataLink.hover)})}
+$(window).on('elementor/frontend/init',function(){elementorFrontend.hooks.addAction(`frontend/element_ready/pxl_text_editor.default`,setClassForLinkFromDataLink)})})(jQuery)
+;
