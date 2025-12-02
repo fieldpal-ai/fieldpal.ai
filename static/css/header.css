@@ -1,0 +1,226 @@
+/* Floating Header Styles */
+
+/* Floating Header Container */
+.floating-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 40px;
+    gap: 0;
+    position: absolute;
+    width: 898px;
+    max-width: calc(100% - 80px);
+    height: 72px;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 40px;
+    background: rgba(255, 255, 255, 0.85);
+    border: 1px solid #D4D0CD;
+    box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.08), 0px 2px 24px rgba(0, 0, 0, 0.08);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: 12px;
+    z-index: 6;
+}
+
+/* Logo Container */
+.header-logo-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 0;
+    gap: 0;
+    width: 144.51px;
+    height: 32px;
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+.header-logo {
+    width: 144.51px;
+    height: 24px;
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+    display: flex;
+    align-items: center;
+}
+
+/* Menu Container */
+.header-menu {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0;
+    gap: 16px;
+    width: auto;
+    height: 40px;
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+}
+
+/* Menu Item */
+.header-menu-item {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 8px 16px;
+    gap: 0;
+    height: 40px;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    flex: none;
+    flex-grow: 0;
+}
+
+/* Active Menu Item */
+.header-menu-item.active {
+    background: #2D2D2D;
+}
+
+/* Nav Text */
+.header-nav-text {
+    height: 24px;
+    font-family: 'Figtree', 'Roboto', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    letter-spacing: 0.15px;
+    white-space: nowrap;
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+/* Active Nav Text (White) */
+.header-menu-item.active .header-nav-text {
+    color: #FFFFFF;
+}
+
+/* Inactive Nav Text (Dark) */
+.header-menu-item:not(.active) .header-nav-text {
+    color: #2D2D2D;
+}
+
+/* Hover State for Inactive Items */
+.header-menu-item:not(.active):hover {
+    background: rgba(45, 45, 45, 0.05);
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .floating-header {
+        width: calc(100% - 40px);
+        padding: 16px 24px;
+        gap: 0;
+    }
+    
+    .header-menu {
+        gap: 12px;
+    }
+    
+    .header-menu-item {
+        padding: 8px 12px;
+    }
+}
+
+@media (max-width: 768px) {
+    .floating-header {
+        width: calc(100% - 32px);
+        padding: 12px 16px;
+        gap: 8px;
+        top: 20px;
+        height: auto;
+        min-height: 60px;
+        flex-wrap: wrap;
+    }
+    
+    .header-logo-container {
+        width: 120px;
+        height: 28px;
+    }
+    
+    .header-logo {
+        width: 120px;
+        height: 20px;
+    }
+    
+    .header-menu {
+        width: 100%;
+        justify-content: center;
+        order: 2;
+        margin-top: 8px;
+    }
+    
+    .header-menu-item {
+        padding: 6px 10px;
+        font-size: 14px;
+    }
+    
+    .header-nav-text {
+        font-size: 14px;
+        line-height: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .floating-header {
+        padding: 10px 12px;
+        gap: 6px;
+    }
+    
+    .header-menu {
+        gap: 4px;
+    }
+    
+    .header-menu-item {
+        padding: 6px 8px;
+        font-size: 12px;
+    }
+    
+    .header-nav-text {
+        font-size: 12px;
+        line-height: 18px;
+    }
+}
+
+/* Fixed Header Variant (for scrolling) */
+.floating-header.fixed {
+    position: fixed;
+    top: 20px;
+}
+
+/* Sticky Header Variant */
+.floating-header.sticky {
+    position: sticky;
+    top: 20px;
+    margin-bottom: 20px;
+}
+
+/* Main Content Spacing for Floating Header */
+body > main {
+    padding-top: 140px;
+}
+
+@media (max-width: 768px) {
+    body > main {
+        padding-top: 100px;
+    }
+}
+
+@media (max-width: 480px) {
+    body > main {
+        padding-top: 90px;
+    }
+}
+

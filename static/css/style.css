@@ -2,3 +2,71 @@
 
 /* Brand styles are imported in base.html */
 
+/* Hero Copy Section */
+.hero-copy {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0;
+    gap: 16px;
+    width: 100%;
+    max-width: 665px;
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+    z-index: 1;
+}
+
+.hero-copy-title {
+    width: 100%;
+    height: 24px;
+    font-family: 'Figtree', sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0.15px;
+    color: #1D1B20;
+    flex: none;
+    order: 0;
+    align-self: stretch;
+    flex-grow: 0;
+}
+
+.hero-copy-heading {
+    width: 100%;
+    height: auto;
+    min-height: 256px;
+    font-family: 'Figtree', sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 57px;
+    line-height: 64px;
+    letter-spacing: -0.25px;
+    color: #1D1B20;
+    flex: none;
+    order: 1;
+    align-self: stretch;
+    flex-grow: 0;
+}
+
+/* Responsive Hero Copy */
+@media (max-width: 768px) {
+    .hero-copy {
+        max-width: 100%;
+    }
+    
+    .hero-copy-heading {
+        font-size: 40px;
+        line-height: 48px;
+        min-height: auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-copy-heading {
+        font-size: 32px;
+        line-height: 40px;
+    }
+}
+

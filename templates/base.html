@@ -7,31 +7,31 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/static/css/style.css">
     <link rel="stylesheet" href="/static/css/brand.css">
+    <link rel="stylesheet" href="/static/css/header.css">
+    <link rel="stylesheet" href="/static/css/footer.css">
     {% block extra_head %}{% endblock %}
 </head>
 <body class="bg-white">
-    <nav class="bg-white shadow-lg border-b border-light-grey">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-16">
-                <div class="flex">
-                    <div class="flex-shrink-0 flex items-center">
-                        <a href="/" class="flex items-center">
-                            <img src="/static/images/FP-Logo-LightBg.svg" alt="FieldPal.ai" class="h-8 md:h-10">
-                        </a>
-                    </div>
-                    <div class="hidden sm:ml-6 sm:flex sm:space-x-8">
-                        <a href="/" class="border-transparent text-space-black hover:border-accent hover:text-accent inline-flex items-center px-1 pt-1 border-b-2 body-md font-medium">
-                            Home
-                        </a>
-                        <a href="/about" class="border-transparent text-space-black hover:border-accent hover:text-accent inline-flex items-center px-1 pt-1 border-b-2 body-md font-medium">
-                            About
-                        </a>
-                        <a href="/contact" class="border-transparent text-space-black hover:border-accent hover:text-accent inline-flex items-center px-1 pt-1 border-b-2 body-md font-medium">
-                            Contact
-                        </a>
-                    </div>
-                </div>
-            </div>
+    <!-- Floating Header -->
+    <nav class="floating-header">
+        <!-- Logo Container -->
+        <div class="header-logo-container">
+            <a href="/" class="header-logo">
+                <img src="/static/images/FP-Logo-LightBg.svg" alt="FieldPal.ai" style="width: 100%; height: 100%;">
+            </a>
+        </div>
+        
+        <!-- Menu -->
+        <div class="header-menu">
+            <a href="/" class="header-menu-item {% if request.url.path == '/' %}active{% endif %}">
+                <span class="header-nav-text">Home</span>
+            </a>
+            <a href="/about" class="header-menu-item {% if request.url.path == '/about' %}active{% endif %}">
+                <span class="header-nav-text">About</span>
+            </a>
+            <a href="/contact" class="header-menu-item {% if request.url.path == '/contact' %}active{% endif %}">
+                <span class="header-nav-text">Contact</span>
+            </a>
         </div>
     </nav>
 
@@ -39,18 +39,99 @@
         {% block content %}{% endblock %}
     </main>
 
-    <footer class="bg-space-black text-white mt-12">
-        <div class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
-            <div class="border-t border-light-grey pt-6">
-                <div class="flex flex-col md:flex-row justify-between items-center gap-4">
-                    <div class="flex items-center gap-5">
-                        <span class="label uppercase letter-spacing-md text-white">Brand Identity</span>
-                        <div class="w-4 h-px bg-light-grey"></div>
-                        <span class="label uppercase letter-spacing-md text-white">Typography</span>
-                        <div class="w-4 h-px bg-light-grey"></div>
-                        <span class="label uppercase letter-spacing-md text-white">Colour Palette</span>
+    <footer class="footer-section">
+        <div class="footer-container">
+            <!-- Footer Header: Logo and Navigation -->
+            <div class="footer-header">
+                <div class="footer-logo-container">
+                    <a href="/" class="footer-logo">
+                        <img src="/static/images/FP-Logo-DarkBg.svg" alt="FieldPal.ai" style="width: 100%; height: 100%;">
+                    </a>
+                </div>
+                <nav class="footer-nav">
+                    <a href="/" class="footer-nav-link">Home</a>
+                    <a href="/about" class="footer-nav-link">About</a>
+                    <a href="/blog" class="footer-nav-link">Blog</a>
+                    <a href="/contact" class="footer-nav-link">Contact</a>
+                </nav>
+            </div>
+            
+            <!-- Footer Hero Copy Section -->
+            <div class="footer-hero-copy">
+                <div class="footer-hero-copy-inner">
+                    <h2 class="footer-heading">We are always ready to help you and answer your questions</h2>
+                </div>
+            </div>
+            
+            <!-- Footer Contact Section -->
+            <div class="footer-contact-section">
+                <div class="footer-contact-item">
+                    <div class="footer-contact-frame">
+                        <div class="footer-contact-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M3 5C3 3.89543 3.89543 3 5 3H8.27924C8.70967 3 9.09181 3.27543 9.22792 3.68377L10.7257 8.17721C10.8831 8.64932 10.6694 9.16531 10.2243 9.38787L7.96701 10.5165C9.06925 12.9612 11.0388 14.9308 13.4835 16.033L14.6121 13.7757C14.8347 13.3306 15.3507 13.1169 15.8228 13.2743L20.3162 14.7721C20.7246 14.9082 21 15.2903 21 15.7208V19C21 20.1046 20.1046 21 19 21H18C9.71573 21 3 14.2843 3 6V5Z" stroke="#FFFFFF" stroke-width="1.5" fill="none"/>
+                            </svg>
+                        </div>
+                        <span class="footer-contact-text">(+44) 000 0000 0000</span>
                     </div>
-                    <p class="body-md text-white">&copy; 2024 FieldPal.ai. All rights reserved.</p>
+                    <div class="footer-contact-title">Phone number</div>
+                </div>
+                <div class="footer-contact-item">
+                    <div class="footer-contact-frame">
+                        <div class="footer-contact-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 2C8.13 2 5 5.13 5 9C5 14.25 12 22 12 22C12 22 19 14.25 19 9C19 5.13 15.87 2 12 2ZM12 11.5C10.62 11.5 9.5 10.38 9.5 9C9.5 7.62 10.62 6.5 12 6.5C13.38 6.5 14.5 7.62 14.5 9C14.5 10.38 13.38 11.5 12 11.5Z" stroke="#FFFFFF" stroke-width="1.5" fill="none"/>
+                            </svg>
+                        </div>
+                        <span class="footer-contact-text">England, UK</span>
+                    </div>
+                    <div class="footer-contact-title">Location</div>
+                </div>
+                <div class="footer-contact-item">
+                    <div class="footer-contact-frame">
+                        <div class="footer-contact-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M22 2L11 13M22 2L15 22L11 13M22 2L2 9L11 13" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <span class="footer-contact-text">info@fieldpal.ai</span>
+                    </div>
+                    <div class="footer-contact-title">Email address</div>
+                </div>
+            </div>
+            
+            <!-- Footer Bottom Section -->
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <div class="footer-copyright">©Copy right FieldPal.ai</div>
+                    <div class="footer-description">SIGHTLINE AI LIMITED (FieldPal.ai). Building 1000 Beach Drive, Waterbeach, Cambridge, England, CB25 9PD</div>
+                </div>
+                <div class="footer-social">
+                    <a href="#" class="footer-social-link" aria-label="YouTube">
+                        <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="30" height="30" rx="4" fill="#FFFFFF"/>
+                            <path d="M12.5 10V20L20 15L12.5 10Z" fill="#2D2D2D"/>
+                        </svg>
+                    </a>
+                    <a href="#" class="footer-social-link" aria-label="X (Twitter)">
+                        <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="30" height="30" rx="4" fill="#FFFFFF"/>
+                            <path d="M22.5 7.5L17.5 12.5L22.5 17.5M7.5 7.5L12.5 12.5L7.5 17.5" stroke="#2D2D2D" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </a>
+                    <a href="#" class="footer-social-link" aria-label="Facebook">
+                        <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="30" height="30" rx="4" fill="#FFFFFF"/>
+                            <path d="M18 10H16C15.4477 10 15 10.4477 15 11V13H18V16H15V22.5H12V16H10V13H12V11C12 9.34315 13.3431 8 15 8H18V10Z" fill="#2D2D2D"/>
+                        </svg>
+                    </a>
+                    <a href="#" class="footer-social-link" aria-label="LinkedIn">
+                        <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="30" height="30" rx="4" fill="#FFFFFF"/>
+                            <path d="M10 12V22H13V16.5C13 14.567 14.567 13 16.5 13C18.433 13 20 14.567 20 16.5V22H23V16.5C23 12.9101 20.0899 10 16.5 10C14.567 10 12.9101 11.3431 12 13.1716V12H10Z" fill="#2D2D2D"/>
+                            <circle cx="8" cy="8" r="2" fill="#2D2D2D"/>
+                        </svg>
+                    </a>
                 </div>
             </div>
         </div>

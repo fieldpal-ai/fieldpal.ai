@@ -4,27 +4,26 @@
 
 {% block content %}
 <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
-    {% if content and content.title %}
-    <div class="text-center">
-        <h1 class="h1-large text-space-black">
-            {{ content.title | safe }}
-        </h1>
-        {% if content.subtitle %}
-        <p class="mt-3 max-w-md mx-auto body-lg text-space-black md:mt-5 md:max-w-3xl">
+    <!-- Hero Copy Section -->
+    <div class="hero-copy">
+        {% if content and content.subtitle %}
+        <div class="hero-copy-title">
             {{ content.subtitle | safe }}
-        </p>
+        </div>
+        {% else %}
+        <div class="hero-copy-title">
+            Real work. Real time. Real AI.
+        </div>
         {% endif %}
-    </div>
-    {% else %}
-    <div class="text-center">
-        <h1 class="h1-large text-space-black">
-            Welcome to <span class="text-accent">FieldPal.ai</span>
+        
+        <h1 class="hero-copy-heading">
+            {% if content and content.title and content.title != 'Home' %}
+                {{ content.title | safe }}
+            {% else %}
+                Voice-first AI for Frontline Workers - capture, find and fix in minutes.
+            {% endif %}
         </h1>
-        <p class="mt-3 max-w-md mx-auto body-lg text-space-black md:mt-5 md:max-w-3xl">
-            Your intelligent field management solution
-        </p>
     </div>
-    {% endif %}
 
     {% if content and content.features %}
     <div class="mt-12 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
