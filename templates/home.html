@@ -4,6 +4,8 @@
 
 {% block extra_head %}
 <script src="/static/js/stats-animation.js" defer></script>
+<script src="/static/js/video-player.js" defer></script>
+<script src="/static/js/faq.js" defer></script>
 {% endblock %}
 
 {% block content %}
@@ -27,6 +29,56 @@
                 Voice-first AI for Frontline Workers - capture, find and fix in minutes.
             {% endif %}
         </h1>
+    </div>
+</div>
+
+<!-- Video Section -->
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" style="padding-bottom: 80px;">
+    <div class="video-container">
+        <div class="video-wrapper" id="video-wrapper">
+            <div class="video-splash-overlay" id="video-splash-overlay">
+                <img src="/static/images/tablet-splash-screen.svg" alt="Video splash screen" class="video-splash-image">
+                <button class="video-play-button" id="video-play-button" aria-label="Play video">
+                    <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="32" cy="32" r="32" fill="#E04F00"/>
+                        <path d="M26.183 44.182V23.818L42.183 34L26.183 44.182Z" fill="white"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="video-embed-container" id="video-embed-container" style="display: none;">
+                <iframe 
+                    id="youtube-video"
+                    width="100%" 
+                    height="100%" 
+                    src="" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
+                </iframe>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Stats Section -->
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" style="padding-bottom: 80px;">
+    <div class="stats-row-container">
+        <div class="stats-item">
+            <div class="stats-number">40%</div>
+            <div class="stats-label">Downtime cut</div>
+        </div>
+        <div class="stats-item">
+            <div class="stats-number">60%</div>
+            <div class="stats-label">Faster access</div>
+        </div>
+        <div class="stats-item">
+            <div class="stats-number">80%</div>
+            <div class="stats-label">Training speed</div>
+        </div>
+        <div class="stats-item">
+            <div class="stats-number">3-4</div>
+            <div class="stats-label">Months to ROI</div>
+        </div>
     </div>
 </div>
 
@@ -72,6 +124,192 @@
     </div>
 </section>
 
+<!-- Problem Section -->
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" style="padding-top: 80px; padding-bottom: 80px;">
+    <div class="hero-copy">
+        <div class="hero-copy-title">
+            The Problem We Solve
+        </div>
+        <h1 class="hero-copy-heading">
+            The challenge holding Industrial Operations Back
+        </h1>
+    </div>
+</div>
+
+<!-- Capture Module Section -->
+<section class="capture-module-section">
+    <div class="capture-module-content">
+        <!-- Top Section: Image and Text -->
+        <div class="capture-module-top">
+            <div class="capture-module-image-container">
+                <img src="/static/images/technician.png" alt="Technician using FieldPal" class="capture-module-image">
+            </div>
+            <div class="capture-module-text">
+                <div class="capture-module-header">
+                    <div class="capture-module-subtitle">Capture Module</div>
+                    <h2 class="capture-module-heading">Hands-free, conversational capture</h2>
+                </div>
+                <p class="capture-module-body">
+                    Record tasks and observations as you work. Technicians can record steps, faults and observations as they work. FieldPal automatically structures and tags every entry to the correct asset or task, turning daily activity into usable operational knowledge.
+                </p>
+                <div class="capture-module-list">
+                    <div class="capture-module-list-item">Captures work even in noisy environments</div>
+                    <div class="capture-module-list-item">Auto-tags entries to assets and tasks</div>
+                    <div class="capture-module-list-item">Cuts down paperwork and manual reporting</div>
+                    <div class="capture-module-list-item">Keeps field data accurate and audit-ready</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Divider -->
+        <div class="capture-module-divider"></div>
+        
+        <!-- Bottom Section: Technology Features -->
+        <div class="capture-module-bottom">
+            <div class="capture-module-bottom-header">
+                <div class="capture-module-subtitle">Technology</div>
+                <h2 class="capture-module-heading">Core tech that powers FieldPal</h2>
+            </div>
+            <div class="capture-module-features">
+                <div class="capture-module-feature">
+                    <h3 class="capture-module-feature-heading">Micro-indexing technology</h3>
+                    <p class="capture-module-feature-text">Sub-second indexing for precise retrieval across assets and transcripts.</p>
+                </div>
+                <div class="capture-module-feature">
+                    <h3 class="capture-module-feature-heading">Human-centred design</h3>
+                    <p class="capture-module-feature-text">Voice-first UX optimised for noisy, hands-busy environments.</p>
+                </div>
+                <div class="capture-module-feature">
+                    <h3 class="capture-module-feature-heading">Contextual intelligence</h3>
+                    <p class="capture-module-feature-text">Answers tailored by asset, location and role for accurate guidance.</p>
+                </div>
+                <div class="capture-module-feature">
+                    <h3 class="capture-module-feature-heading">API-first platform</h3>
+                    <p class="capture-module-feature-text">Restful APIs and connectors to CMMS, ERP and document systems.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Decorative Elements -->
+    <div class="capture-module-decorative-top">
+        <svg width="337" height="329" viewBox="0 0 337 329" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M165 100H209.5L49.5 328.5H0L165 100Z" fill="#E04F00"/>
+            <path d="M292 -14H336.5L176.5 214.5H127L292 -14Z" fill="#E6E3E1"/>
+        </svg>
+    </div>
+    <div class="capture-module-decorative-bottom">
+        <svg width="337" height="329" viewBox="0 0 337 329" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M165 100H209.5L49.5 328.5H0L165 100Z" fill="#E04F00"/>
+            <path d="M292 -14H336.5L176.5 214.5H127L292 -14Z" fill="#E6E3E1"/>
+        </svg>
+    </div>
+</section>
+
+<!-- FAQ Section -->
+<section class="faq-section">
+    <div class="faq-container">
+        <div class="faq-header">
+            <div class="faq-label">FAQs</div>
+            <h2 class="faq-title">
+                Understanding FieldPal<span class="faq-title-accent">.ai</span>
+            </h2>
+        </div>
+        
+        <div class="faq-list">
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span class="faq-question-text">What is FieldPal.ai?</span>
+                    <span class="faq-icon"></span>
+                </div>
+                <div class="faq-answer">
+                    FieldPal.ai is an AI-driven platform that converts complex operational documentation into searchable, bite-sized knowledge for frontline and field workers, enabling faster troubleshooting and safer operations.
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span class="faq-question-text">Who uses FieldPal.ai?</span>
+                    <span class="faq-icon"></span>
+                </div>
+                <div class="faq-answer">
+                    Organisations with field-facing operations — manufacturing, utilities, facilities management, large equipment service and inspection teams — that need quick access to technical knowledge and standard operating procedures.
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span class="faq-question-text">What problems does FieldPal.ai solve?</span>
+                    <span class="faq-icon"></span>
+                </div>
+                <div class="faq-answer">
+                    It reduces asset downtime, captures tribal expertise, unifies fragmented documentation and helps teams meet compliance and safety requirements by surfacing the right information at the right time.
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span class="faq-question-text">How does FieldPal.ai work with our existing systems?</span>
+                    <span class="faq-icon"></span>
+                </div>
+                <div class="faq-answer">
+                    FieldPal.ai is API-first and supports integration with legacy systems, document stores and ERPs so you can embed knowledge into current workflows and apps. For developer resources, request API docs via our contact form.
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span class="faq-question-text">Is FieldPal.ai secure and enterprise-grade?</span>
+                    <span class="faq-icon"></span>
+                </div>
+                <div class="faq-answer">
+                    Yes — FieldPal.ai is designed for enterprise deployment with access controls and enterprise security features. For specific compliance, certification and data residency requirements, speak to the FieldPal team.
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span class="faq-question-text">Can field workers use FieldPal.ai offline?</span>
+                    <span class="faq-icon"></span>
+                </div>
+                <div class="faq-answer">
+                    FieldPal.ai supports mobile-first workflows; discuss offline caching and sync options with the implementation team to ensure knowledge is available where connectivity is limited.
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span class="faq-question-text">How long does implementation take?</span>
+                    <span class="faq-icon"></span>
+                </div>
+                <div class="faq-answer">
+                    Implementation time depends on scale and source data complexity. A typical pilot (ingesting a subset of documents and integrating one system) can be scoped within a few weeks — liaise with FieldPal for a tailored timeline.
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span class="faq-question-text">How is FieldPal.ai priced?</span>
+                    <span class="faq-icon"></span>
+                </div>
+                <div class="faq-answer">
+                    Pricing varies by number of users, integrations and level of customisation. Contact sales for a demo and tailored quote.
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span class="faq-question-text">What support and onboarding do you offer?</span>
+                    <span class="faq-icon"></span>
+                </div>
+                <div class="faq-answer">
+                    Onboarding includes implementation support, admin training and access to developer documentation. Ongoing support packages are available — see the Support page or contact the team.
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     {% if content and content.features %}
     <div class="mt-12 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
@@ -94,33 +332,6 @@
     <div class="mt-12">
         <div class="prose max-w-none">
             {{ content.body | safe }}
-        </div>
-    </div>
-    {% else %}
-    <div class="mt-12 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
-        <div class="bg-white overflow-hidden shadow rounded-md border border-light-grey">
-            <div class="p-6">
-                <h3 class="h3 text-space-black">Feature One</h3>
-                <p class="mt-2 body-md text-space-black">
-                    Description of feature one goes here.
-                </p>
-            </div>
-        </div>
-        <div class="bg-white overflow-hidden shadow rounded-md border border-light-grey">
-            <div class="p-6">
-                <h3 class="h3 text-space-black">Feature Two</h3>
-                <p class="mt-2 body-md text-space-black">
-                    Description of feature two goes here.
-                </p>
-            </div>
-        </div>
-        <div class="bg-white overflow-hidden shadow rounded-md border border-light-grey">
-            <div class="p-6">
-                <h3 class="h3 text-space-black">Feature Three</h3>
-                <p class="mt-2 body-md text-space-black">
-                    Description of feature three goes here.
-                </p>
-            </div>
         </div>
     </div>
     {% endif %}
