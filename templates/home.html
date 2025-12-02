@@ -2,9 +2,13 @@
 
 {% block title %}Home - FieldPal.ai{% endblock %}
 
+{% block extra_head %}
+<script src="/static/js/stats-animation.js" defer></script>
+{% endblock %}
+
 {% block content %}
-<div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
-    <!-- Hero Copy Section -->
+<!-- Hero Copy Section -->
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" style="padding-top: 60px; padding-bottom: 0;">
     <div class="hero-copy">
         {% if content and content.subtitle %}
         <div class="hero-copy-title">
@@ -24,7 +28,51 @@
             {% endif %}
         </h1>
     </div>
+</div>
 
+<!-- Section Container - Full Width -->
+<section class="section-container">
+    <div class="section-content-frame">
+        <div class="section-content-column">
+            <div class="section-hero-copy">
+                <div class="section-hero-copy-inner">
+                    <div class="section-hero-text">
+                        <div class="section-title">What We Do</div>
+                        <h2 class="section-heading-medium">Harness the power of AI for frontline operations.</h2>
+                    </div>
+                    <div class="section-body-text">
+                        FieldPal provides customised AI solutions tailored to the specific needs and goals of industrial operations. From manufacturing to utilities to industrial services, we deliver platform capabilities including:
+                    </div>
+                    <div class="section-list">
+                        <div class="section-list-item">Voice-first data capture and analysis</div>
+                        <div class="section-list-item">Legacy system integration and unified intelligence</div>
+                        <div class="section-list-item">Predictive equipment maintenance and safety</div>
+                        <div class="section-list-item">Real-time dashboards and decision support</div>
+                        <div class="section-list-item">Enterprise-grade security and compliance</div>
+                    </div>
+                </div>
+                <a href="/contact" class="section-button">
+                    <span class="section-button-label">Get in touch</span>
+                </a>
+            </div>
+        </div>
+        <div style="position: relative; flex: 1; max-width: 546px; min-height: 400px;">
+            <img src="/static/images/character.png" alt="FieldPal character" class="section-image">
+            <div class="section-stats-container">
+                <div class="section-stat-card section-stat-card-orange">
+                    <div class="section-stat-number">30%</div>
+                    <div class="section-stat-label">Downtime Reduction</div>
+                </div>
+                <div class="section-stat-card section-stat-card-dark">
+                    <div class="section-stat-number">100%</div>
+                    <div class="section-stat-label">Faster Scaling</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     {% if content and content.features %}
     <div class="mt-12 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
         {% for feature in content.features %}
