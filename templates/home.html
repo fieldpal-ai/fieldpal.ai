@@ -6,6 +6,7 @@
 <script src="/static/js/stats-animation.js" defer></script>
 <script src="/static/js/video-player.js" defer></script>
 <script src="/static/js/faq.js" defer></script>
+<script src="/static/js/sticky-scroll.js" defer></script>
 {% endblock %}
 
 {% block content %}
@@ -125,7 +126,7 @@
 </section>
 
 <!-- Problem Section -->
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" style="padding-top: 80px; padding-bottom: 80px;">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" style="padding-top: 80px; padding-bottom: 40px;">
     <div class="hero-copy">
         <div class="hero-copy-title">
             The Problem We Solve
@@ -135,6 +136,73 @@
         </h1>
     </div>
 </div>
+
+<!-- Challenges Features Section -->
+<section class="challenges-features-section">
+    <!-- Row 1: Text Left, Image Right -->
+    <div class="challenges-features-row">
+        <div class="challenges-features-hero-copy">
+            <div class="challenges-features-text-frame">
+                <div class="challenges-features-title">Unplanned Downtime</div>
+                <h2 class="challenges-features-heading">5M+</h2>
+            </div>
+            <div class="challenges-features-body">
+                £5M+ in annual losses from preventable equipment failures. Every unplanned shutdown triggers lost production, emergency repair costs, and cascading supply chain headaches.
+            </div>
+        </div>
+        <div class="challenges-features-image-container">
+            <img src="/static/images/image2.png" alt="Feature image" class="challenges-features-image">
+        </div>
+    </div>
+    
+    <!-- Row 2: Image Left, Text Right -->
+    <div class="challenges-features-row reverse">
+        <div class="challenges-features-hero-copy">
+            <div class="challenges-features-text-frame">
+                <div class="challenges-features-title">Knowledge Loss</div>
+                <h2 class="challenges-features-heading">20+ Years</h2>
+            </div>
+            <div class="challenges-features-body">
+                20+ years of expertise walks out the door each time a technician retires. New hires take over a year to catch up, meanwhile, mistakes and lost efficiency become the norm.
+            </div>
+        </div>
+        <div class="challenges-features-image-container">
+            <img src="/static/images/image3.png" alt="Feature image" class="challenges-features-image">
+        </div>
+    </div>
+    
+    <!-- Row 3: Text Left, Image Right -->
+    <div class="challenges-features-row">
+        <div class="challenges-features-hero-copy">
+            <div class="challenges-features-text-frame">
+                <div class="challenges-features-title">Data Silos</div>
+                <h2 class="challenges-features-heading">60%</h2>
+            </div>
+            <div class="challenges-features-body">
+                Workers waste up to 60% of their time searching for information hidden in legacy systems and scattered files - time lost, problems unsolved, decisions delayed.
+            </div>
+        </div>
+        <div class="challenges-features-image-container">
+            <img src="/static/images/image4.png" alt="Feature image" class="challenges-features-image">
+        </div>
+    </div>
+    
+    <!-- Row 4: Image Left, Text Right -->
+    <div class="challenges-features-row reverse">
+        <div class="challenges-features-hero-copy">
+            <div class="challenges-features-text-frame">
+                <div class="challenges-features-title">Safety & Compliance Risk</div>
+                <h2 class="challenges-features-heading">99.7%</h2>
+            </div>
+            <div class="challenges-features-body">
+                99.7% accuracy and consistency is demanded by regulators, but manual processes make perfect compliance nearly impossible. The cost of a single safety slip or failed audit can devastate reputations and finances.
+            </div>
+        </div>
+        <div class="challenges-features-image-container">
+            <img src="/static/images/image5.png" alt="Feature image" class="challenges-features-image">
+        </div>
+    </div>
+</section>
 
 <!-- Capture Module Section -->
 <section class="capture-module-section">

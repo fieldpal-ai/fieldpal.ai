@@ -83,3 +83,4 @@ class AnalyticsService:
             cls._instance.shutdown()
             cls._instance = None
 
+

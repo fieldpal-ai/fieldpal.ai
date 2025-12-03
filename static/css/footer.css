@@ -8,14 +8,13 @@
     padding: 100px;
     gap: 10px;
     width: 100%;
-    max-width: 1440px;
-    margin: 0 auto;
     min-height: 636px;
     background: #2D2D2D;
     flex: none;
     order: 5;
     flex-grow: 0;
     z-index: 5;
+    box-sizing: border-box;
 }
 
 /* Footer Main Container */

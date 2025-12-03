@@ -6,11 +6,12 @@ from pulumi import Config
 config = Config()
 project_name = config.get("project_name") or "fieldpal-ai"
 location = config.get("location") or "West Europe"
+resource_group_name = config.get("resource_group_name") or f"{project_name}-rg"
 
 # Create resource group
 resource_group = azure_native.resources.ResourceGroup(
-    f"{project_name}-rg",
-    resource_group_name=f"{project_name}-rg",
+    resource_group_name,
+    resource_group_name=resource_group_name,
     location=location
 )
 

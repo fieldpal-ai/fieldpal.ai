@@ -10,3 +10,4 @@ config:
   fieldpal-ai:posthog_host: https://us.i.posthog.com
   fieldpal-ai:posthog_project_api_key:
     secure: AAABAMtbINJmDyRnPZooxySJJ3vD/f+jmlrjyTq+GweVljZvuHNENtpGT9UG4iDHaA+9/+hkN8t51NU/SAlMzLPOv8CUqbxJrm7UTbYpKA==
+  fieldpal-ai:resource_group_name: Fieldpal_Website
