@@ -84,3 +84,4 @@ class AnalyticsService:
             cls._instance = None
 
 
+

@@ -41,8 +41,8 @@ class AzureStorageService:
         except AzureError as e:
             print(f"Error ensuring container exists: {e}")
     
-    async def get_content(self, page: str) -> Dict:
-        """Get content for a specific page"""
+    async def get_content(self, page: str, section: str = None) -> Dict:
+        """Get content for a specific page, optionally filtered by section"""
         if not self._is_configured:
             # Return default content for local development
             return {"title": page.title(), "content": ""}
@@ -62,15 +62,23 @@ class AzureStorageService:
                 lambda: blob_client.download_blob().readall()
             )
             
-            return json.loads(content.decode('utf-8'))
+            data = json.loads(content.decode('utf-8'))
+            
+            # If section is specified, return only that section
+            if section and section in data:
+                return {"content": data[section]}
+            
+            return data
         except AzureError as e:
             if "BlobNotFound" in str(e):
                 # Return default content if not found
+                if section:
+                    return {"content": {}}
                 return {"title": page.title(), "content": ""}
             raise
     
-    async def save_content(self, page: str, content: Dict):
-        """Save content for a specific page"""
+    async def save_content(self, page: str, content: Dict, section: str = None):
+        """Save content for a specific page, optionally updating only a section"""
         # Recheck configuration in case it was loaded after service creation
         if not self._is_configured:
             # Try to reload connection string
@@ -94,7 +102,23 @@ class AzureStorageService:
                 blob=blob_name
             )
             
-            content_json = json.dumps(content, indent=2)
+            # If updating a section, merge with existing content
+            if section:
+                try:
+                    existing_content = await loop.run_in_executor(
+                        None,
+                        lambda: blob_client.download_blob().readall()
+                    )
+                    full_content = json.loads(existing_content.decode('utf-8'))
+                except AzureError:
+                    # File doesn't exist, create new
+                    full_content = {}
+                
+                # Update the specific section
+                full_content[section] = content
+                content_json = json.dumps(full_content, indent=2)
+            else:
+                content_json = json.dumps(content, indent=2)
             
             content_settings = ContentSettings(content_type="application/json")
             await loop.run_in_executor(

@@ -22,7 +22,7 @@ async def login(request: Request):
         )
     
     auth0_audience = Config.get_auth0_audience()
-    auth0_callback_url = Config.get_auth0_callback_url()
+    auth0_callback_url = Config.get_auth0_callback_url(request)
     
     # Ensure domain doesn't have protocol
     if auth0_domain.startswith("http://") or auth0_domain.startswith("https://"):
@@ -64,7 +64,7 @@ async def callback(request: Request, code: str = None, error: str = None):
         auth0_domain = Config.get_auth0_domain()
         auth0_client_id = Config.get_auth0_client_id()
         auth0_client_secret = Config.get_auth0_client_secret()
-        auth0_callback_url = Config.get_auth0_callback_url()
+        auth0_callback_url = Config.get_auth0_callback_url(request)
         
         # Ensure domain doesn't have protocol
         if auth0_domain.startswith("http://") or auth0_domain.startswith("https://"):

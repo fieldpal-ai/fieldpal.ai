@@ -114,8 +114,13 @@ web_app = azure_native.web.WebApp(
             azure_native.web.NameValuePairArgs(
                 name="SCM_DO_BUILD_DURING_DEPLOYMENT",
                 value="true"
+            ),
+            azure_native.web.NameValuePairArgs(
+                name="WEBSITES_PORT",
+                value="8000"
             )
-        ]
+        ],
+        app_command_line="python -m uvicorn app.main:app --host 0.0.0.0 --port 8000 --workers 2"
     ),
     https_only=True
 )

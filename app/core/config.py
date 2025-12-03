@@ -5,9 +5,12 @@ Falls back to environment variables for local development
 import os
 import json
 import subprocess
-from typing import Optional, Dict
+from typing import Optional, Dict, TYPE_CHECKING
 from functools import lru_cache
 from pathlib import Path
+
+if TYPE_CHECKING:
+    from fastapi import Request
 
 class Config:
     """Configuration manager that reads from Pulumi or environment variables"""
@@ -23,8 +26,14 @@ class Config:
         
         cls._pulumi_loaded = True
         
+        # Skip Pulumi in Azure/production - use environment variables instead
+        # Check for Azure-specific environment variables
+        if os.getenv("WEBSITE_SITE_NAME") or os.getenv("WEBSITES_ENABLE_APP_SERVICE_STORAGE"):
+            # We're in Azure, skip Pulumi and use env vars
+            return None
+        
         try:
-            # Try to get Pulumi outputs
+            # Try to get Pulumi outputs (only for local development)
             pulumi_dir = Path(__file__).resolve().parent.parent.parent / "pulumi"
             if not pulumi_dir.exists():
                 return None
@@ -40,7 +49,7 @@ class Config:
             if result.returncode == 0:
                 cls._pulumi_outputs = json.loads(result.stdout)
                 return cls._pulumi_outputs
-        except (subprocess.TimeoutExpired, subprocess.CalledProcessError, json.JSONDecodeError, FileNotFoundError):
+        except (subprocess.TimeoutExpired, subprocess.CalledProcessError, json.JSONDecodeError, FileNotFoundError, PermissionError, OSError):
             # Pulumi not available or not configured
             pass
         
@@ -107,8 +116,32 @@ class Config:
         return os.getenv("AUTH0_AUDIENCE", "")
     
     @classmethod
-    def get_auth0_callback_url(cls) -> str:
-        """Get Auth0 callback URL"""
+    def get_auth0_callback_url(cls, request: Optional['Request'] = None) -> str:
+        """Get Auth0 callback URL - dynamically from request if provided, otherwise from config"""
+        # If request is provided, construct URL from current request
+        if request:
+            # Check for forwarded headers (common behind proxies/load balancers)
+            scheme = request.headers.get("X-Forwarded-Proto", request.url.scheme)
+            host = request.headers.get("X-Forwarded-Host", request.url.hostname)
+            
+            # If X-Forwarded-Host includes port, use it; otherwise check original port
+            if ":" in host:
+                host, port_str = host.split(":", 1)
+                try:
+                    port = int(port_str)
+                except ValueError:
+                    port = None
+            else:
+                port = request.url.port
+            
+            # Construct base URL
+            if port and port not in (80, 443):
+                base_url = f"{scheme}://{host}:{port}"
+            else:
+                base_url = f"{scheme}://{host}"
+            return f"{base_url}/auth/callback"
+        
+        # Fall back to configured value
         pulumi_outputs = cls._load_pulumi_outputs()
         if pulumi_outputs and "auth0_callback_url" in pulumi_outputs:
             return str(pulumi_outputs["auth0_callback_url"]) if pulumi_outputs["auth0_callback_url"] else ""

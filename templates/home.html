@@ -13,19 +13,18 @@
 <!-- Hero Copy Section -->
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" style="padding-top: 60px; padding-bottom: 0;">
     <div class="hero-copy">
-        {% if content and content.subtitle %}
+        {% if content and content.hero and content.hero.subtitle %}
         <div class="hero-copy-title">
-            {{ content.subtitle | safe }}
-        </div>
+            {{ content.hero.subtitle | safe }}
         {% else %}
         <div class="hero-copy-title">
             Real work. Real time. Real AI.
-        </div>
         {% endif %}
+        </div>
         
         <h1 class="hero-copy-heading">
-            {% if content and content.title and content.title != 'Home' %}
-                {{ content.title | safe }}
+            {% if content and content.hero and content.hero.title %}
+                {{ content.hero.title | safe }}
             {% else %}
                 Voice-first AI for Frontline Workers - capture, find and fix in minutes.
             {% endif %}
@@ -64,6 +63,14 @@
 <!-- Stats Section -->
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" style="padding-bottom: 80px;">
     <div class="stats-row-container">
+        {% if content and content.stats and content.stats.stats %}
+            {% for stat in content.stats.stats %}
+            <div class="stats-item">
+                <div class="stats-number">{{ stat.number }}</div>
+                <div class="stats-label">{{ stat.label }}</div>
+            </div>
+            {% endfor %}
+        {% else %}
         <div class="stats-item">
             <div class="stats-number">40%</div>
             <div class="stats-label">Downtime cut</div>
@@ -80,6 +87,7 @@
             <div class="stats-number">3-4</div>
             <div class="stats-label">Months to ROI</div>
         </div>
+        {% endif %}
     </div>
 </div>
 
@@ -90,22 +98,50 @@
             <div class="section-hero-copy">
                 <div class="section-hero-copy-inner">
                     <div class="section-hero-text">
-                        <div class="section-title">What We Do</div>
-                        <h2 class="section-heading-medium">Harness the power of AI for frontline operations.</h2>
+                        <div class="section-title">
+                            {% if content and content['what-we-do'] and content['what-we-do'].title %}
+                                {{ content['what-we-do'].title }}
+                            {% else %}
+                                What We Do
+                            {% endif %}
+                        </div>
+                        <h2 class="section-heading-medium">
+                            {% if content and content['what-we-do'] and content['what-we-do'].heading %}
+                                {{ content['what-we-do'].heading | safe }}
+                            {% else %}
+                                Harness the power of AI for frontline operations.
+                            {% endif %}
+                        </h2>
                     </div>
                     <div class="section-body-text">
-                        FieldPal provides customised AI solutions tailored to the specific needs and goals of industrial operations. From manufacturing to utilities to industrial services, we deliver platform capabilities including:
+                        {% if content and content['what-we-do'] and content['what-we-do'].body %}
+                            {{ content['what-we-do'].body | safe }}
+                        {% else %}
+                            FieldPal provides customised AI solutions tailored to the specific needs and goals of industrial operations. From manufacturing to utilities to industrial services, we deliver platform capabilities including:
+                        {% endif %}
                     </div>
                     <div class="section-list">
+                        {% if content and content['what-we-do'] and content['what-we-do'].list_items %}
+                            {% for item in content['what-we-do'].list_items %}
+                            <div class="section-list-item">{{ item }}</div>
+                            {% endfor %}
+                        {% else %}
                         <div class="section-list-item">Voice-first data capture and analysis</div>
                         <div class="section-list-item">Legacy system integration and unified intelligence</div>
                         <div class="section-list-item">Predictive equipment maintenance and safety</div>
                         <div class="section-list-item">Real-time dashboards and decision support</div>
                         <div class="section-list-item">Enterprise-grade security and compliance</div>
+                        {% endif %}
                     </div>
                 </div>
                 <a href="/contact" class="section-button">
-                    <span class="section-button-label">Get in touch</span>
+                    <span class="section-button-label">
+                        {% if content and content['what-we-do'] and content['what-we-do'].button_text %}
+                            {{ content['what-we-do'].button_text }}
+                        {% else %}
+                            Get in touch
+                        {% endif %}
+                    </span>
                 </a>
             </div>
         </div>
@@ -129,16 +165,42 @@
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" style="padding-top: 80px; padding-bottom: 40px;">
     <div class="hero-copy">
         <div class="hero-copy-title">
-            The Problem We Solve
+            {% if content and content.problem and content.problem.title %}
+                {{ content.problem.title }}
+            {% else %}
+                The Problem We Solve
+            {% endif %}
         </div>
         <h1 class="hero-copy-heading">
-            The challenge holding Industrial Operations Back
+            {% if content and content.problem and content.problem.heading %}
+                {{ content.problem.heading | safe }}
+            {% else %}
+                The challenge holding Industrial Operations Back
+            {% endif %}
         </h1>
     </div>
 </div>
 
 <!-- Challenges Features Section -->
 <section class="challenges-features-section">
+    {% if content and content.challenges and content.challenges.challenges %}
+        {% for challenge in content.challenges.challenges %}
+        <div class="challenges-features-row{% if loop.index % 2 == 0 %} reverse{% endif %}">
+            <div class="challenges-features-hero-copy">
+                <div class="challenges-features-text-frame">
+                    <div class="challenges-features-title">{{ challenge.title }}</div>
+                    <h2 class="challenges-features-heading">{{ challenge.heading }}</h2>
+                </div>
+                <div class="challenges-features-body">
+                    {{ challenge.body }}
+                </div>
+            </div>
+            <div class="challenges-features-image-container">
+                <img src="/static/images/image{{ loop.index + 1 }}.png" alt="Feature image" class="challenges-features-image">
+            </div>
+        </div>
+        {% endfor %}
+    {% else %}
     <!-- Row 1: Text Left, Image Right -->
     <div class="challenges-features-row">
         <div class="challenges-features-hero-copy">
@@ -202,6 +264,7 @@
             <img src="/static/images/image5.png" alt="Feature image" class="challenges-features-image">
         </div>
     </div>
+    {% endif %}
 </section>
 
 <!-- Capture Module Section -->
@@ -214,17 +277,39 @@
             </div>
             <div class="capture-module-text">
                 <div class="capture-module-header">
-                    <div class="capture-module-subtitle">Capture Module</div>
-                    <h2 class="capture-module-heading">Hands-free, conversational capture</h2>
+                    <div class="capture-module-subtitle">
+                        {% if content and content['capture-module'] and content['capture-module'].subtitle %}
+                            {{ content['capture-module'].subtitle }}
+                        {% else %}
+                            Capture Module
+                        {% endif %}
+                    </div>
+                    <h2 class="capture-module-heading">
+                        {% if content and content['capture-module'] and content['capture-module'].heading %}
+                            {{ content['capture-module'].heading }}
+                        {% else %}
+                            Hands-free, conversational capture
+                        {% endif %}
+                    </h2>
                 </div>
                 <p class="capture-module-body">
-                    Record tasks and observations as you work. Technicians can record steps, faults and observations as they work. FieldPal automatically structures and tags every entry to the correct asset or task, turning daily activity into usable operational knowledge.
+                    {% if content and content['capture-module'] and content['capture-module'].body %}
+                        {{ content['capture-module'].body | safe }}
+                    {% else %}
+                        Record tasks and observations as you work. Technicians can record steps, faults and observations as they work. FieldPal automatically structures and tags every entry to the correct asset or task, turning daily activity into usable operational knowledge.
+                    {% endif %}
                 </p>
                 <div class="capture-module-list">
+                    {% if content and content['capture-module'] and content['capture-module'].list_items %}
+                        {% for item in content['capture-module'].list_items %}
+                        <div class="capture-module-list-item">{{ item }}</div>
+                        {% endfor %}
+                    {% else %}
                     <div class="capture-module-list-item">Captures work even in noisy environments</div>
                     <div class="capture-module-list-item">Auto-tags entries to assets and tasks</div>
                     <div class="capture-module-list-item">Cuts down paperwork and manual reporting</div>
                     <div class="capture-module-list-item">Keeps field data accurate and audit-ready</div>
+                    {% endif %}
                 </div>
             </div>
         </div>
@@ -235,10 +320,30 @@
         <!-- Bottom Section: Technology Features -->
         <div class="capture-module-bottom">
             <div class="capture-module-bottom-header">
-                <div class="capture-module-subtitle">Technology</div>
-                <h2 class="capture-module-heading">Core tech that powers FieldPal</h2>
+                <div class="capture-module-subtitle">
+                    {% if content and content['capture-module'] and content['capture-module'].tech_subtitle %}
+                        {{ content['capture-module'].tech_subtitle }}
+                    {% else %}
+                        Technology
+                    {% endif %}
+                </div>
+                <h2 class="capture-module-heading">
+                    {% if content and content['capture-module'] and content['capture-module'].tech_heading %}
+                        {{ content['capture-module'].tech_heading }}
+                    {% else %}
+                        Core tech that powers FieldPal
+                    {% endif %}
+                </h2>
             </div>
             <div class="capture-module-features">
+                {% if content and content['capture-module'] and content['capture-module'].tech_features %}
+                    {% for feature in content['capture-module'].tech_features %}
+                    <div class="capture-module-feature">
+                        <h3 class="capture-module-feature-heading">{{ feature.heading }}</h3>
+                        <p class="capture-module-feature-text">{{ feature.text }}</p>
+                    </div>
+                    {% endfor %}
+                {% else %}
                 <div class="capture-module-feature">
                     <h3 class="capture-module-feature-heading">Micro-indexing technology</h3>
                     <p class="capture-module-feature-text">Sub-second indexing for precise retrieval across assets and transcripts.</p>
@@ -255,6 +360,7 @@
                     <h3 class="capture-module-feature-heading">API-first platform</h3>
                     <p class="capture-module-feature-text">Restful APIs and connectors to CMMS, ERP and document systems.</p>
                 </div>
+                {% endif %}
             </div>
         </div>
     </div>
@@ -280,11 +386,28 @@
         <div class="faq-header">
             <div class="faq-label">FAQs</div>
             <h2 class="faq-title">
-                Understanding FieldPal<span class="faq-title-accent">.ai</span>
+                {% if content and content.faq and content.faq.title %}
+                    {{ content.faq.title | safe }}
+                {% else %}
+                    Understanding FieldPal<span class="faq-title-accent">.ai</span>
+                {% endif %}
             </h2>
         </div>
         
         <div class="faq-list">
+            {% if content and content.faq and content.faq.questions %}
+                {% for faq in content.faq.questions %}
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span class="faq-question-text">{{ faq.question }}</span>
+                        <span class="faq-icon"></span>
+                    </div>
+                    <div class="faq-answer">
+                        {{ faq.answer }}
+                    </div>
+                </div>
+                {% endfor %}
+            {% else %}
             <div class="faq-item">
                 <div class="faq-question">
                     <span class="faq-question-text">What is FieldPal.ai?</span>
@@ -374,6 +497,7 @@
                     Onboarding includes implementation support, admin training and access to developer documentation. Ongoing support packages are available — see the Support page or contact the team.
                 </div>
             </div>
+            {% endif %}
         </div>
     </div>
 </section>
