@@ -21,8 +21,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 120px 0 40px 0;
-    gap: 64px;
+    padding: 60px 0 0 0;
+    gap: 0;
     isolation: isolate;
     width: 100%;
     min-height: auto;
@@ -49,7 +49,7 @@
     order: 1;
     flex-grow: 0;
     z-index: 1;
-    margin: 0 auto;
+    margin: 0 auto 80px auto;
 }
 
 .contact-hero-label {

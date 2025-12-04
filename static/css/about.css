@@ -1,9 +1,31 @@
 /* About Page Carousel Styles */
 
+/* Override hero-copy margin for about page to match home page video spacing */
+.about-page-header .hero-copy {
+    margin-bottom: 12px;
+}
+
+/* Responsive - Equal padding for about page sections */
+@media (max-width: 768px) {
+    .about-page-header {
+        padding-left: 24px !important;
+        padding-right: 24px !important;
+    }
+    
+    .about-page-header .hero-copy-heading {
+        padding-right: 0 !important;
+    }
+    
+    .about-carousel-container {
+        padding-left: 24px !important;
+        padding-right: 24px !important;
+    }
+}
+
 .about-carousel-section {
-    background-color: #E6E3E1;
-    padding: 80px 0;
-    margin: 80px 0;
+    background-color: transparent;
+    padding: 0 0 80px 0;
+    margin: 0;
     width: 100%;
 }
 
@@ -13,7 +35,7 @@
     padding: 0 24px;
     display: flex;
     flex-direction: column;
-    gap: 48px;
+    gap: 12px;
 }
 
 /* Button Controls */
@@ -86,30 +108,31 @@
 /* Content Panels */
 .about-carousel-content {
     position: relative;
-    min-height: 300px;
+    height: 240px;
     width: 100%;
-    display: grid;
-    grid-template-columns: repeat(3, 206px);
-    gap: 24px;
-    align-items: start;
+    display: flex;
     justify-content: center;
 }
 
 .about-carousel-panel {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    width: calc(206px * 3 + 24px * 2);
+    max-width: 100%;
     opacity: 0;
     visibility: hidden;
-    transform: translateY(20px);
     transition: opacity 0.5s ease, transform 0.5s ease, visibility 0.5s ease;
     display: flex;
     flex-direction: column;
-    gap: 24px;
-    width: 100%;
+    gap: 16px;
 }
 
 .about-carousel-panel.active {
     opacity: 1;
     visibility: visible;
-    transform: translateY(0);
+    transform: translateX(-50%) translateY(0);
 }
 
 .about-carousel-heading {
@@ -130,12 +153,17 @@
     font-size: 18px;
     line-height: 28px;
     color: #4E4947;
-    max-width: 800px;
+    width: 100%;
+    margin-bottom: 24px;
 }
 
 .about-carousel-text p {
-    margin: 0;
+    margin: 0 0 12px 0;
     padding: 0;
+}
+
+.about-carousel-text p:last-child {
+    margin-bottom: 0;
 }
 
 /* Bottom Indicator Lines */
@@ -161,8 +189,25 @@
     background-color: #E04F00;
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
+/* Responsive Design - Medium screens - keep buttons horizontal but adjust sizes */
+@media (max-width: 900px) and (min-width: 601px) {
+    .about-carousel-button {
+        width: 180px;
+        padding: 10px 12px;
+    }
+    
+    .about-carousel-content {
+        grid-template-columns: repeat(3, 180px);
+        gap: 16px;
+    }
+    
+    .about-carousel-bottom-line {
+        width: 180px;
+    }
+}
+
+/* Responsive Design - Small screens - stack buttons */
+@media (max-width: 600px) {
     .about-carousel-buttons {
         flex-direction: column;
         align-items: center;
@@ -220,9 +265,9 @@
 /* About Hero Section */
 .about-hero-section {
     background-color: #F8F8F8;
-    padding: 80px 0;
+    padding: 60px 0;
     width: 100%;
-    margin-top: 80px;
+    margin-top: 0;
 }
 
 .about-hero-container {
@@ -232,7 +277,7 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: 60px;
+    gap: 40px;
 }
 
 .about-hero-image-container {
@@ -244,7 +289,7 @@
 
 .about-hero-image {
     width: 100%;
-    max-width: 600px;
+    max-width: 450px;
     height: auto;
     object-fit: contain;
 }
