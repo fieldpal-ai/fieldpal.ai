@@ -22,7 +22,7 @@
             </a>
         </div>
         
-        <!-- Menu -->
+        <!-- Desktop Menu -->
         <div class="header-menu">
             <a href="/" class="header-menu-item {% if request.url.path == '/' %}active{% endif %}">
                 <span class="header-nav-text">Home</span>
@@ -34,7 +34,50 @@
                 <span class="header-nav-text">Contact</span>
             </a>
         </div>
+        
+        <!-- Mobile Hamburger Button -->
+        <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Toggle menu">
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+        </button>
     </nav>
+    
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu-overlay" id="mobile-menu-overlay">
+        <div class="mobile-menu-container">
+            <div class="mobile-menu-content">
+                <!-- Menu Items -->
+                <div class="mobile-menu-items">
+                    <a href="/" class="mobile-menu-item {% if request.url.path == '/' %}active{% endif %}">
+                        <span class="mobile-nav-text">Home</span>
+                    </a>
+                    <a href="/about" class="mobile-menu-item {% if request.url.path == '/about' %}active{% endif %}">
+                        <span class="mobile-nav-text">About</span>
+                    </a>
+                    <a href="/blog" class="mobile-menu-item {% if request.url.path == '/blog' %}active{% endif %}">
+                        <span class="mobile-nav-text">Blog</span>
+                    </a>
+                    <a href="/contact" class="mobile-menu-item {% if request.url.path == '/contact' %}active{% endif %}">
+                        <span class="mobile-nav-text">Contact</span>
+                    </a>
+                </div>
+                
+                <!-- Social Icons -->
+                <div class="mobile-menu-social">
+                    <a href="#" class="mobile-social-link" aria-label="YouTube">
+                        <img src="/static/icons/youtube-play-svgrepo-com 1.svg" alt="YouTube" width="30" height="30">
+                    </a>
+                    <a href="#" class="mobile-social-link" aria-label="X (Twitter)">
+                        <img src="/static/icons/x.svg" alt="X (Twitter)" width="30" height="30">
+                    </a>
+                    <a href="https://www.linkedin.com/company/fieldpal" class="mobile-social-link" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
+                        <img src="/static/icons/linkedin.svg" alt="LinkedIn" width="30" height="30">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <main>
         {% block content %}{% endblock %}
@@ -111,6 +154,7 @@
         </div>
     </footer>
 
+    <script src="/static/js/mobile-menu.js" defer></script>
     {% block extra_scripts %}{% endblock %}
 </body>
 </html>
