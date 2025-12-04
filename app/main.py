@@ -1,6 +1,7 @@
 from fastapi import FastAPI, Request, HTTPException
 from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
+from starlette.exceptions import HTTPException as StarletteHTTPException
 from pathlib import Path
 from dotenv import load_dotenv
 from app.core.templates import render_template
@@ -52,9 +53,12 @@ app.include_router(admin.router, prefix="/admin")
 app.include_router(api.router, prefix="/api")
 
 # Custom 404 handler
-@app.exception_handler(404)
-async def not_found_handler(request: Request, exc: HTTPException):
-    return render_template("404.html", request=request)
+@app.exception_handler(StarletteHTTPException)
+async def not_found_handler(request: Request, exc: StarletteHTTPException):
+    if exc.status_code == 404:
+        return render_template("404.html", request=request)
+    # Re-raise other HTTP exceptions
+    raise exc
 
 @app.get("/health")
 async def health_check():
