@@ -304,8 +304,9 @@
     align-items: center;
     padding: 0;
     gap: 24px;
-    margin: 0 auto;
-    width: 192px;
+    margin: 0;
+    margin-left: auto;
+    width: auto;
     height: 30px;
     flex: none;
     order: 1;

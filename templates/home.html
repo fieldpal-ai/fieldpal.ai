@@ -37,13 +37,7 @@
     <div class="video-container">
         <div class="video-wrapper" id="video-wrapper">
             <div class="video-splash-overlay" id="video-splash-overlay">
-                <img src="/static/images/tablet-splash-screen.svg" alt="Video splash screen" class="video-splash-image">
-                <button class="video-play-button" id="video-play-button" aria-label="Play video">
-                    <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <circle cx="32" cy="32" r="32" fill="#E04F00"/>
-                        <path d="M26.183 44.182V23.818L42.183 34L26.183 44.182Z" fill="white"/>
-                    </svg>
-                </button>
+                <img src="/static/images/video splash.png" alt="Video splash screen" class="video-splash-image">
             </div>
             <div class="video-embed-container" id="video-embed-container" style="display: none;">
                 <iframe 
@@ -145,7 +139,7 @@
                 </a>
             </div>
         </div>
-        <div style="position: relative; flex: 1; max-width: 546px; min-height: 400px;">
+        <div class="section-image-container">
             <img src="/static/images/character.png" alt="FieldPal character" class="section-image">
             <div class="section-stats-container">
                 <div class="section-stat-card section-stat-card-orange">
@@ -174,7 +168,7 @@
         <h1 class="hero-copy-heading">
             {% if content and content.problem and content.problem.heading %}
                 {{ content.problem.heading | safe }}
-            {% else %}
+    {% else %}
                 The challenge holding Industrial Operations Back
             {% endif %}
         </h1>
