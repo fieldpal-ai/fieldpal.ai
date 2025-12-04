@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, HTTPException, UploadFile, File, Query
+from fastapi import APIRouter, Depends, HTTPException, UploadFile, File, Query, status
 from fastapi.responses import JSONResponse
 from app.auth import require_auth
 from app.services.azure_storage import AzureStorageService
@@ -6,6 +6,26 @@ from app.services.analytics import AnalyticsService
 from typing import List, Optional
 
 router = APIRouter()
+
+# List of authorized admin user IDs
+AUTHORIZED_ADMIN_USERS = [
+    "google-oauth2|113092643924672726107",
+    "google-oauth2|102070775897269563284"
+]
+
+def is_authorized_admin(user: dict) -> bool:
+    """Check if user is an authorized admin"""
+    user_id = user.get("sub") or user.get("user_id")
+    return user_id in AUTHORIZED_ADMIN_USERS
+
+def require_admin_auth(user: dict = Depends(require_auth)) -> dict:
+    """Dependency to require admin authorization"""
+    if not is_authorized_admin(user):
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Access denied. Admin authorization required."
+        )
+    return user
 
 # Lazy-load storage service to avoid errors on import
 _storage_service = None
@@ -33,7 +53,7 @@ async def update_content(
     page: str, 
     content: dict, 
     section: Optional[str] = Query(None),
-    user: dict = Depends(require_auth)
+    user: dict = Depends(require_admin_auth)
 ):
     """Update content for a specific page, optionally updating only a section"""
     try:
@@ -56,7 +76,7 @@ async def update_content(
         raise HTTPException(status_code=500, detail=str(e))
 
 @router.post("/images/upload")
-async def upload_image(file: UploadFile = File(...), user: dict = Depends(require_auth)):
+async def upload_image(file: UploadFile = File(...), user: dict = Depends(require_admin_auth)):
     """Upload an image to Azure Blob Storage"""
     try:
         storage_service = get_storage_service()
@@ -80,7 +100,7 @@ async def upload_image(file: UploadFile = File(...), user: dict = Depends(requir
         raise HTTPException(status_code=500, detail=str(e))
 
 @router.get("/images")
-async def list_images(user: dict = Depends(require_auth)):
+async def list_images(user: dict = Depends(require_admin_auth)):
     """List all images in Azure Blob Storage"""
     try:
         storage_service = get_storage_service()
@@ -90,7 +110,7 @@ async def list_images(user: dict = Depends(require_auth)):
         raise HTTPException(status_code=500, detail=str(e))
 
 @router.delete("/images/{image_name}")
-async def delete_image(image_name: str, user: dict = Depends(require_auth)):
+async def delete_image(image_name: str, user: dict = Depends(require_admin_auth)):
     """Delete an image from Azure Blob Storage"""
     try:
         storage_service = get_storage_service()

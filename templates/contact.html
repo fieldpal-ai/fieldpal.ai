@@ -2,50 +2,98 @@
 
 {% block title %}Contact - FieldPal.ai{% endblock %}
 
+{% block extra_head %}
+<link rel="stylesheet" href="/static/css/contact.css">
+{% endblock %}
+
 {% block content %}
-<div class="max-w-2xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
-    <div class="bg-white shadow rounded-md border border-light-grey p-8">
-        {% if content and content.title %}
-        <h1 class="h1 text-space-black mb-6">{{ content.title | safe }}</h1>
-        {% else %}
-        <h1 class="h1 text-space-black mb-6">Contact Us</h1>
-        {% endif %}
-        
-        {% if content and content.intro %}
-        <div class="mb-6 body-lg text-space-black">
-            {{ content.intro | safe }}
+<div class="contact-page">
+    <!-- Hero Section -->
+    <div class="contact-hero">
+        <!-- Hero Copy -->
+        <div class="contact-hero-copy">
+            <div class="contact-hero-label">Contact us</div>
+            <h1 class="contact-hero-heading">Clarify your goals and identify where AI can enhance your business.</h1>
         </div>
-        {% endif %}
         
-        <form id="contactForm" class="space-y-6">
-            <div>
-                <label for="name" class="block label text-space-black">Name</label>
-                <input type="text" id="name" name="name" required
-                    class="mt-1 block w-full rounded-sm border-light-grey shadow-sm focus:border-accent focus:ring-accent body-md px-3 py-2 border">
-            </div>
-            <div>
-                <label for="email" class="block label text-space-black">Email</label>
-                <input type="email" id="email" name="email" required
-                    class="mt-1 block w-full rounded-sm border-light-grey shadow-sm focus:border-accent focus:ring-accent body-md px-3 py-2 border">
-            </div>
-            <div>
-                <label for="subject" class="block label text-space-black">Subject</label>
-                <input type="text" id="subject" name="subject"
-                    class="mt-1 block w-full rounded-sm border-light-grey shadow-sm focus:border-accent focus:ring-accent body-md px-3 py-2 border">
-            </div>
-            <div>
-                <label for="message" class="block label text-space-black">Message</label>
-                <textarea id="message" name="message" rows="4" required
-                    class="mt-1 block w-full rounded-sm border-light-grey shadow-sm focus:border-accent focus:ring-accent body-md px-3 py-2 border"></textarea>
-            </div>
-            <div>
-                <button type="submit"
-                    class="w-full flex justify-center py-2 px-4 border border-transparent rounded-sm shadow-sm button-text font-medium text-white bg-accent hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent">
-                    Send Message
-                </button>
-            </div>
-            <div id="formMessage" class="hidden body-sm"></div>
-        </form>
+        <!-- Contact Form Container -->
+        <div class="contact-form-container">
+            <form id="contactForm" class="contact-form">
+                <!-- Name Field -->
+                <div class="contact-text-field">
+                    <div class="contact-text-field-wrapper">
+                        <div class="contact-text-field-state-layer">
+                            <div class="contact-text-field-content">
+                                <div class="contact-text-field-label-container">
+                                    <input 
+                                        type="text" 
+                                        id="name" 
+                                        name="name" 
+                                        required
+                                        class="contact-text-field-label" 
+                                        placeholder="Name"
+                                    >
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="contact-supporting-text"></div>
+                </div>
+                
+                <!-- Email Field -->
+                <div class="contact-text-field">
+                    <div class="contact-text-field-wrapper">
+                        <div class="contact-text-field-state-layer">
+                            <div class="contact-text-field-content">
+                                <div class="contact-text-field-label-container">
+                                    <input 
+                                        type="email" 
+                                        id="email" 
+                                        name="email" 
+                                        required
+                                        class="contact-text-field-label" 
+                                        placeholder="Email"
+                                    >
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="contact-supporting-text"></div>
+                </div>
+                
+                <!-- Message Field -->
+                <div class="contact-text-field contact-text-field-large">
+                    <div class="contact-text-field-wrapper">
+                        <div class="contact-text-field-state-layer">
+                            <div class="contact-text-field-content">
+                                <div class="contact-text-field-label-container">
+                                    <textarea 
+                                        id="message" 
+                                        name="message" 
+                                        required
+                                        class="contact-text-field-label" 
+                                        placeholder="Message"
+                                    ></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="contact-supporting-text"></div>
+                </div>
+                
+                <!-- Submit Button -->
+                <div class="contact-submit-button-container">
+                    <button type="submit" class="contact-submit-button">
+                        <div class="contact-submit-button-state-layer">
+                            <span class="contact-submit-button-label">Send message</span>
+                        </div>
+                    </button>
+                </div>
+            </form>
+            
+            <!-- Form Message -->
+            <div id="formMessage" class="contact-form-message hidden"></div>
+        </div>
     </div>
 </div>
 
@@ -55,24 +103,44 @@ document.getElementById('contactForm').addEventListener('submit', async (e) => {
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData);
     
-    const response = await fetch('/contact/submit', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data)
-    });
-    
-    const result = await response.json();
-    const messageDiv = document.getElementById('formMessage');
-    messageDiv.classList.remove('hidden');
-    messageDiv.textContent = result.message;
-    messageDiv.className = result.status === 'success' 
-        ? 'body-sm text-green-600' 
-        : 'body-sm text-red-600';
-    
-    if (result.status === 'success') {
-        e.target.reset();
+    try {
+        const response = await fetch('/contact/submit', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data)
+        });
+        
+        // Check if response is a redirect (303, 302, etc.)
+        if (response.status === 303 || response.status === 302 || response.status === 301 || response.status === 307 || response.status === 308) {
+            // Get redirect URL from Location header
+            const redirectUrl = response.headers.get('Location') || '/';
+            window.location.href = redirectUrl;
+        } else if (response.ok) {
+            // If successful but not a redirect, redirect to home with message
+            window.location.href = '/?contact_success=' + encodeURIComponent("Thank you for your message. We'll get back to you soon!");
+        } else {
+            // Handle error case
+            try {
+                const result = await response.json();
+                const messageDiv = document.getElementById('formMessage');
+                messageDiv.classList.remove('hidden');
+                messageDiv.textContent = result.message || 'An error occurred. Please try again.';
+                messageDiv.className = 'contact-form-message error';
+            } catch (jsonError) {
+                const messageDiv = document.getElementById('formMessage');
+                messageDiv.classList.remove('hidden');
+                messageDiv.textContent = 'An error occurred. Please try again.';
+                messageDiv.className = 'contact-form-message error';
+            }
+        }
+    } catch (error) {
+        // Handle network errors
+        const messageDiv = document.getElementById('formMessage');
+        messageDiv.classList.remove('hidden');
+        messageDiv.textContent = 'An error occurred. Please try again.';
+        messageDiv.className = 'contact-form-message error';
     }
 });
 </script>

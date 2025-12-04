@@ -2,32 +2,94 @@
 
 {% block title %}About - FieldPal.ai{% endblock %}
 
+{% block extra_head %}
+<link rel="stylesheet" href="/static/css/about.css">
+<script src="/static/js/about-carousel.js" defer></script>
+{% endblock %}
+
 {% block content %}
-<div class="max-w-4xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
-    <div class="bg-white shadow rounded-md border border-light-grey p-8">
-        {% if content and content.title %}
-        <h1 class="h1 text-space-black mb-6">{{ content.title | safe }}</h1>
-        {% else %}
-        <h1 class="h1 text-space-black mb-6">About FieldPal.ai</h1>
-        {% endif %}
-        
-        <div class="prose max-w-none">
-            {% if content and content.body %}
-            {{ content.body | safe }}
-            {% else %}
-            <p class="body-lg text-space-black mb-4">
-                FieldPal.ai is a modern solution for field management, designed to help you manage your operations efficiently.
-            </p>
-            <p class="body-lg text-space-black mb-4">
-                Our mission is to provide intelligent tools that make field management easier and more effective.
-            </p>
-            <h2 class="h2 text-space-black mt-8 mb-4">Our Team</h2>
-            <p class="body-lg text-space-black">
-                We're a dedicated team working to bring you the best field management experience.
-            </p>
-            {% endif %}
+<!-- Header Section -->
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" style="padding-top: 60px; padding-bottom: 0;">
+    <div class="hero-copy">
+        <div class="hero-copy-title">
+            about us
         </div>
+        <h1 class="hero-copy-heading">
+            Building AI that Works in the Real World.
+        </h1>
     </div>
 </div>
+
+<!-- Mission/Vision/Enterprise Carousel Section -->
+<section class="about-carousel-section">
+    <div class="about-carousel-container">
+        <!-- Button Controls -->
+        <div class="about-carousel-buttons">
+            <button class="about-carousel-button active" data-section="mission">
+                <span class="about-carousel-button-label">Mission</span>
+            </button>
+            <button class="about-carousel-button" data-section="vision">
+                <span class="about-carousel-button-label">Vision</span>
+            </button>
+            <button class="about-carousel-button" data-section="enterprise">
+                <span class="about-carousel-button-label">Enterprise</span>
+            </button>
+        </div>
+        
+        <!-- Content Sections -->
+        <div class="about-carousel-content">
+            <div class="about-carousel-panel active" data-section="mission">
+                <h2 class="about-carousel-heading">Mission</h2>
+                <div class="about-carousel-text">
+                    <p>We give industrial frontline workers access to AI-powered intelligence that bridges legacy systems, unlocks knowledge, prevents failures, and empowers field teams.</p>
+                </div>
+            </div>
+            
+            <div class="about-carousel-panel" data-section="vision">
+                <h2 class="about-carousel-heading">Vision</h2>
+                <div class="about-carousel-text">
+                    <p>We envision a future where field workers are empowered with real-time intelligence, operations are predictive, expertise is preserved, and industrial operations become smarter, safer, and more efficient through purpose-built AI.</p>
+                </div>
+            </div>
+            
+            <div class="about-carousel-panel" data-section="enterprise">
+                <h2 class="about-carousel-heading">Enterprise</h2>
+                <div class="about-carousel-text">
+                    <p>We forecast equipment failures 7-30 days in advance, enabling proactive prevention and delivering an average 40% reduction in unplanned downtime for our customers.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Bottom Indicator Lines -->
+        <div class="about-carousel-bottom-indicators">
+            <div class="about-carousel-bottom-line active" data-indicator="mission"></div>
+            <div class="about-carousel-bottom-line" data-indicator="vision"></div>
+            <div class="about-carousel-bottom-line" data-indicator="enterprise"></div>
+        </div>
+    </div>
+</section>
+
+<!-- Hero Image Section -->
+<section class="about-hero-section">
+    <div class="about-hero-container">
+        <div class="about-hero-image-container">
+            <img src="/static/images/about-hero-illustration.png" alt="Frontline workers collaborating" class="about-hero-image">
+        </div>
+        <div class="about-hero-content">
+            <div class="hero-copy-title">
+                Built for frontline operations
+            </div>
+            <h2 class="about-hero-heading">
+                Transform the way your teams work
+            </h2>
+            <p class="about-hero-body">
+                Whether you're exploring AI for the first time or scaling existing systems, we'll help you map the right solution for your operation.
+            </p>
+            <a href="/contact" class="about-hero-button">
+                <span class="about-hero-button-label">Get in touch</span>
+            </a>
+        </div>
+    </div>
+</section>
 {% endblock %}
 

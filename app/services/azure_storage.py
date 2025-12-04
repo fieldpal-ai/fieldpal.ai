@@ -1,10 +1,13 @@
 from azure.storage.blob import BlobServiceClient, BlobClient, ContainerClient, ContentSettings
-from azure.core.exceptions import AzureError
+from azure.data.tables import TableServiceClient, TableClient
+from azure.core.exceptions import AzureError, ResourceExistsError
 import json
 from typing import Dict, List, Optional
 import asyncio
 from functools import partial
+from datetime import datetime
 from app.core.config import Config
+import uuid
 
 class AzureStorageService:
     """Service for interacting with Azure Blob Storage"""
@@ -12,14 +15,20 @@ class AzureStorageService:
     def __init__(self):
         self.connection_string = Config.get_azure_storage_connection_string()
         self.container_name = Config.get_azure_storage_container()
+        self.table_name = "contacts"
         self._blob_service_client = None
+        self._table_service_client = None
         self._is_configured = bool(self.connection_string)
         
         if self._is_configured:
             self._blob_service_client = BlobServiceClient.from_connection_string(
                 self.connection_string
             )
+            self._table_service_client = TableServiceClient.from_connection_string(
+                self.connection_string
+            )
             self._ensure_container_exists()
+            self._ensure_table_exists()
     
     @property
     def blob_service_client(self):
@@ -40,6 +49,33 @@ class AzureStorageService:
                 container_client.create_container()
         except AzureError as e:
             print(f"Error ensuring container exists: {e}")
+    
+    @property
+    def table_service_client(self):
+        """Lazy-load table service client"""
+        if not self._is_configured:
+            raise ValueError("AZURE_STORAGE_CONNECTION_STRING environment variable is required")
+        if self._table_service_client is None:
+            self._table_service_client = TableServiceClient.from_connection_string(
+                self.connection_string
+            )
+        return self._table_service_client
+    
+    def _ensure_table_exists(self):
+        """Ensure the contacts table exists, create if it doesn't"""
+        if not self._is_configured:
+            return
+        try:
+            table_client = self.table_service_client.get_table_client(self.table_name)
+            try:
+                # Try to create the table - will raise ResourceExistsError if it already exists
+                table_client.create_table()
+            except ResourceExistsError:
+                # Table already exists, which is fine
+                pass
+        except AzureError as e:
+            # Log other errors but don't fail initialization
+            print(f"Error ensuring table exists: {e}")
     
     async def get_content(self, page: str, section: str = None) -> Dict:
         """Get content for a specific page, optionally filtered by section"""
@@ -242,4 +278,83 @@ class AzureStorageService:
             blob=f"images/{image_name}"
         )
         return blob_client.url
+    
+    async def save_contact_submission(self, name: str, email: str, message: str, subject: Optional[str] = None) -> str:
+        """Save a contact form submission to Azure Table Storage"""
+        # Recheck configuration in case it was loaded after service creation
+        if not self._is_configured:
+            self.connection_string = Config.get_azure_storage_connection_string()
+            self._is_configured = bool(self.connection_string)
+            if self._is_configured:
+                self._table_service_client = TableServiceClient.from_connection_string(
+                    self.connection_string
+                )
+                self._ensure_table_exists()
+        
+        if not self._is_configured:
+            raise Exception("Azure Storage is not configured. Please set AZURE_STORAGE_CONNECTION_STRING or ensure Pulumi outputs are available")
+        
+        # Generate unique row key
+        row_key = str(uuid.uuid4())
+        partition_key = datetime.utcnow().strftime("%Y-%m")
+        
+        # Create entity
+        entity = {
+            "PartitionKey": partition_key,
+            "RowKey": row_key,
+            "Name": name,
+            "Email": email,
+            "Message": message,
+            "Subject": subject or "",
+            "SubmittedAt": datetime.utcnow().isoformat(),
+        }
+        
+        loop = asyncio.get_event_loop()
+        try:
+            table_client = self.table_service_client.get_table_client(self.table_name)
+            
+            # Run blocking operation in thread pool
+            await loop.run_in_executor(
+                None,
+                lambda: table_client.create_entity(entity=entity)
+            )
+            
+            return row_key
+        except AzureError as e:
+            raise Exception(f"Failed to save contact submission: {str(e)}")
+    
+    async def get_contact_submissions(self, limit: int = 100) -> List[Dict]:
+        """Get contact form submissions from Azure Table Storage"""
+        if not self._is_configured:
+            return []
+        
+        loop = asyncio.get_event_loop()
+        try:
+            table_client = self.table_service_client.get_table_client(self.table_name)
+            
+            # Run blocking operation in thread pool
+            entities = await loop.run_in_executor(
+                None,
+                lambda: list(table_client.list_entities())
+            )
+            
+            # Convert to list of dicts and sort by SubmittedAt descending
+            submissions = []
+            for entity in entities[:limit]:
+                submissions.append({
+                    "partition_key": entity.get("PartitionKey"),
+                    "row_key": entity.get("RowKey"),
+                    "name": entity.get("Name", ""),
+                    "email": entity.get("Email", ""),
+                    "message": entity.get("Message", ""),
+                    "subject": entity.get("Subject", ""),
+                    "submitted_at": entity.get("SubmittedAt", ""),
+                })
+            
+            # Sort by submitted_at descending
+            submissions.sort(key=lambda x: x.get("submitted_at", ""), reverse=True)
+            
+            return submissions
+        except AzureError as e:
+            raise Exception(f"Failed to get contact submissions: {str(e)}")
 

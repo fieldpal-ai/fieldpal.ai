@@ -10,8 +10,17 @@
 {% endblock %}
 
 {% block content %}
+<!-- Contact Success Message -->
+{% if request.query_params.get('contact_success') %}
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" style="padding-top: 120px; padding-bottom: 20px;">
+    <div class="contact-success-message" style="background-color: #E8F5E9; color: #2E7D32; padding: 16px 24px; border-radius: 6px; font-family: 'Figtree', sans-serif; font-size: 16px; line-height: 24px; margin-bottom: 20px;">
+        {{ request.query_params.get('contact_success') }}
+    </div>
+</div>
+{% endif %}
+
 <!-- Hero Copy Section -->
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" style="padding-top: 60px; padding-bottom: 0;">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" style="padding-top: {% if request.query_params.get('contact_success') %}20px{% else %}60px{% endif %}; padding-bottom: 0;">
     <div class="hero-copy">
         {% if content and content.hero and content.hero.subtitle %}
         <div class="hero-copy-title">

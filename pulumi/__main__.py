@@ -7,6 +7,7 @@ config = Config()
 project_name = config.get("project_name") or "fieldpal-ai"
 location = config.get("location") or "West Europe"
 resource_group_name = config.get("resource_group_name") or f"{project_name}-rg"
+web_app_name = config.get("web_app_name") or "fieldpal-ai-website"
 
 # Create resource group
 resource_group = azure_native.resources.ResourceGroup(
@@ -60,11 +61,15 @@ app_service_plan = azure_native.web.AppServicePlan(
 )
 
 # Create Web App
+# Azure App Service names must be globally unique, lowercase, and use hyphens
+# Normalize the name: lowercase, replace spaces with hyphens
+normalized_web_app_name = web_app_name.replace(" ", "-").lower()
 web_app = azure_native.web.WebApp(
-    f"{project_name}-app",
+    f"{project_name}-app",  # Pulumi resource identifier
     resource_group_name=resource_group.name,
     location=resource_group.location,
     server_farm_id=app_service_plan.id,
+    name=normalized_web_app_name,  # Actual Azure App Service name
     site_config=azure_native.web.SiteConfigArgs(
         linux_fx_version="PYTHON|3.11",
         app_settings=[
@@ -106,6 +111,14 @@ web_app = azure_native.web.WebApp(
             azure_native.web.NameValuePairArgs(
                 name="POSTHOG_HOST",
                 value=config.get("posthog_host", "https://us.i.posthog.com")
+            ),
+            azure_native.web.NameValuePairArgs(
+                name="SENDGRID_API_KEY",
+                value=config.get_secret("sendgrid_api_key") or ""
+            ),
+            azure_native.web.NameValuePairArgs(
+                name="SENDGRID_FROM_EMAIL",
+                value=config.get("sendgrid_from_email", "no-reply@fieldpal.ai")
             ),
             azure_native.web.NameValuePairArgs(
                 name="WEBSITES_ENABLE_APP_SERVICE_STORAGE",

@@ -120,6 +120,29 @@ async def verify_token(token: str) -> Dict:
             detail=f"Token verification failed: {str(e)}"
         )
 
+async def get_userinfo_from_auth0(access_token: str) -> Optional[Dict]:
+    """Fetch user info from Auth0 userinfo endpoint"""
+    try:
+        auth0_domain = Config.get_auth0_domain()
+        if not auth0_domain:
+            return None
+        
+        # Ensure domain doesn't have protocol
+        if auth0_domain.startswith("http://") or auth0_domain.startswith("https://"):
+            auth0_domain = auth0_domain.replace("https://", "").replace("http://", "").strip("/")
+        
+        userinfo_url = f"https://{auth0_domain}/userinfo"
+        
+        async with httpx.AsyncClient() as client:
+            response = await client.get(
+                userinfo_url,
+                headers={"Authorization": f"Bearer {access_token}"}
+            )
+            response.raise_for_status()
+            return response.json()
+    except Exception:
+        return None
+
 async def get_current_user_optional_from_request(request: Request) -> Optional[Dict]:
     """Get current authenticated user from request, returns None if not authenticated"""
     # Try to get token from cookie
@@ -143,7 +166,16 @@ async def get_current_user_optional_from_request(request: Request) -> Optional[D
         return None
     
     try:
-        return await verify_token(token)
+        payload = await verify_token(token)
+        
+        # Always try to fetch from userinfo endpoint to get complete user info (email, name, etc.)
+        # The access token might not have all user fields
+        userinfo = await get_userinfo_from_auth0(token)
+        if userinfo:
+            # Merge userinfo into payload, userinfo takes precedence
+            payload.update(userinfo)
+        
+        return payload
     except Exception:
         return None
 

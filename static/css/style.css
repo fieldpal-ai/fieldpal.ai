@@ -20,6 +20,13 @@ main {
     overflow-x: hidden;
 }
 
+/* Ensure all headings wrap properly */
+h1, h2, h3, h4, h5, h6 {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+}
+
 /* Dot Matrix Background Pattern */
 body.bg-white,
 body {
@@ -62,7 +69,8 @@ body {
 
 .hero-copy-title {
     width: 100%;
-    height: 24px;
+    height: auto;
+    min-height: 24px;
     font-family: 'Figtree', sans-serif;
     font-style: normal;
     font-weight: 600;
@@ -74,6 +82,8 @@ body {
     order: 0;
     align-self: stretch;
     flex-grow: 0;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
 .hero-copy-heading {
@@ -91,6 +101,9 @@ body {
     order: 1;
     align-self: stretch;
     flex-grow: 0;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
 }
 
 /* Responsive Hero Copy */
@@ -109,6 +122,7 @@ body {
         min-height: auto;
         width: 100%;
         max-width: 100%;
+        padding-right: 24px;
     }
     
     /* Override Tailwind padding at low widths */
@@ -152,6 +166,7 @@ body {
     .hero-copy-heading {
         font-size: 32px;
         line-height: 40px;
+        padding-right: 20px;
     }
 }
 
@@ -460,7 +475,8 @@ body {
 
 .section-title {
     width: 100%;
-    height: 24px;
+    height: auto;
+    min-height: 24px;
     font-family: 'Figtree', sans-serif;
     font-style: normal;
     font-weight: 600;
@@ -472,6 +488,8 @@ body {
     order: 0;
     align-self: stretch;
     flex-grow: 0;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
 .section-heading-medium {
@@ -488,6 +506,9 @@ body {
     order: 1;
     align-self: stretch;
     flex-grow: 0;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
 }
 
 .section-body-text {
@@ -884,7 +905,8 @@ body {
 
 .challenges-features-title {
     width: 100%;
-    height: 24px;
+    height: auto;
+    min-height: 24px;
     font-family: 'Figtree', sans-serif;
     font-style: normal;
     font-weight: 600;
@@ -892,6 +914,8 @@ body {
     line-height: 24px;
     letter-spacing: 0.15px;
     color: #1D1B20;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
 .challenges-features-heading {
@@ -904,6 +928,9 @@ body {
     font-size: 45px;
     line-height: 52px;
     color: #1D1B20;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
 }
 
 .challenges-features-body {
@@ -1067,7 +1094,9 @@ body {
 
 .capture-module-subtitle {
     width: 554px;
-    height: 24px;
+    max-width: 100%;
+    height: auto;
+    min-height: 24px;
     font-family: 'Figtree', sans-serif;
     font-style: normal;
     font-weight: 600;
@@ -1078,10 +1107,13 @@ body {
     flex: none;
     order: 0;
     align-self: stretch;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
 .capture-module-heading {
     width: 554px;
+    max-width: 100%;
     height: auto;
     min-height: 104px;
     font-family: 'Figtree', sans-serif;
@@ -1094,6 +1126,9 @@ body {
     order: 1;
     align-self: stretch;
     margin: 0;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
 }
 
 .capture-module-body {
@@ -1322,13 +1357,17 @@ body {
         width: 100%;
         max-width: 554px;
     }
-    
+}
+
+/* Tablet - 2 columns for tech features */
+@media (max-width: 1024px) and (min-width: 769px) {
     .capture-module-features {
         flex-wrap: wrap;
     }
     
     .capture-module-feature {
         width: calc(50% - 12px);
+        flex: 0 0 calc(50% - 12px);
     }
 }
 
@@ -1455,10 +1494,12 @@ body {
     
     .capture-module-features {
         flex-direction: column;
+        flex-wrap: nowrap;
     }
     
     .capture-module-feature {
         width: 100%;
+        flex: 0 0 100%;
     }
     
     .capture-module-decorative-top,
@@ -1630,6 +1671,8 @@ body {
     letter-spacing: 0.15px;
     color: #1D1B20;
     margin-bottom: 16px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
 .faq-title {
@@ -1641,6 +1684,9 @@ body {
     letter-spacing: -0.25px;
     color: #1D1B20;
     margin: 0;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
 }
 
 .faq-title-accent {
@@ -1680,6 +1726,8 @@ body {
     line-height: 32px;
     color: #1D1B20;
     flex: 1;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
 .faq-icon {

@@ -196,4 +196,67 @@ class Config:
     def is_auth0_configured(cls) -> bool:
         """Check if Auth0 is configured"""
         return bool(cls.get_auth0_domain() and cls.get_auth0_audience())
+    
+    @classmethod
+    def get_sendgrid_api_key(cls) -> str:
+        """Get SendGrid API key from Pulumi config or environment variable"""
+        # First try environment variable (for deployed environments)
+        api_key = os.getenv("SENDGRID_API_KEY", "")
+        if api_key:
+            return api_key
+        
+        # Try to get from Pulumi config for local development
+        # Note: Secrets need to be retrieved using pulumi config get
+        try:
+            pulumi_dir = Path(__file__).resolve().parent.parent.parent / "pulumi"
+            if pulumi_dir.exists():
+                result = subprocess.run(
+                    ["pulumi", "config", "get", "sendgrid_api_key"],
+                    cwd=str(pulumi_dir),
+                    capture_output=True,
+                    text=True,
+                    timeout=5
+                )
+                if result.returncode == 0:
+                    api_key = result.stdout.strip()
+                    if api_key:
+                        return api_key
+        except (subprocess.TimeoutExpired, subprocess.CalledProcessError, FileNotFoundError, PermissionError, OSError):
+            # Pulumi not available or not configured
+            pass
+        
+        return ""
+    
+    @classmethod
+    def get_sendgrid_from_email(cls) -> str:
+        """Get SendGrid from email address"""
+        # Try environment variable first
+        from_email = os.getenv("SENDGRID_FROM_EMAIL", "")
+        if from_email:
+            return from_email
+        
+        # Try Pulumi config
+        pulumi_outputs = cls._load_pulumi_outputs()
+        if pulumi_outputs and "sendgrid_from_email" in pulumi_outputs:
+            return str(pulumi_outputs["sendgrid_from_email"])
+        
+        # Try Pulumi config directly
+        try:
+            pulumi_dir = Path(__file__).resolve().parent.parent.parent / "pulumi"
+            if pulumi_dir.exists():
+                result = subprocess.run(
+                    ["pulumi", "config", "get", "sendgrid_from_email"],
+                    cwd=str(pulumi_dir),
+                    capture_output=True,
+                    text=True,
+                    timeout=5
+                )
+                if result.returncode == 0:
+                    from_email = result.stdout.strip()
+                    if from_email:
+                        return from_email
+        except (subprocess.TimeoutExpired, subprocess.CalledProcessError, FileNotFoundError, PermissionError, OSError):
+            pass
+        
+        return "no-reply@fieldpal.ai"
 

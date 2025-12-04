@@ -1,0 +1,389 @@
+/* About Page Carousel Styles */
+
+.about-carousel-section {
+    background-color: #E6E3E1;
+    padding: 80px 0;
+    margin: 80px 0;
+    width: 100%;
+}
+
+.about-carousel-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+}
+
+/* Button Controls */
+.about-carousel-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 0px;
+    gap: 24px;
+    width: 100%;
+    height: 48px;
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+.about-carousel-button {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 16px;
+    width: 206px;
+    height: 40px;
+    border-radius: 99px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+
+.about-carousel-button.active {
+    background: #E04F00;
+}
+
+.about-carousel-button:not(.active) {
+    background: #FFFFFF;
+    border: 1px solid #B8B1AE;
+}
+
+.about-carousel-button-label {
+    font-family: 'Roboto', 'Figtree', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 20px;
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.1px;
+    white-space: nowrap;
+}
+
+.about-carousel-button.active .about-carousel-button-label {
+    color: #FFFFFF;
+}
+
+.about-carousel-button:not(.active) .about-carousel-button-label {
+    color: #4E4947;
+}
+
+.about-carousel-button:hover {
+    transform: translateY(-2px);
+}
+
+.about-carousel-button:active {
+    transform: translateY(0);
+}
+
+/* Content Panels */
+.about-carousel-content {
+    position: relative;
+    min-height: 300px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 206px);
+    gap: 24px;
+    align-items: start;
+    justify-content: center;
+}
+
+.about-carousel-panel {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease, visibility 0.5s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    width: 100%;
+}
+
+.about-carousel-panel.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.about-carousel-heading {
+    font-family: 'Figtree', sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 48px;
+    line-height: 56px;
+    color: #1D1B20;
+    margin: 0;
+    padding: 0;
+}
+
+.about-carousel-text {
+    font-family: 'Figtree', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 28px;
+    color: #4E4947;
+    max-width: 800px;
+}
+
+.about-carousel-text p {
+    margin: 0;
+    padding: 0;
+}
+
+/* Bottom Indicator Lines */
+.about-carousel-bottom-indicators {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    margin-top: 40px;
+    width: 100%;
+}
+
+.about-carousel-bottom-line {
+    height: 2px;
+    width: 206px;
+    background-color: #B8B1AE;
+    transition: background-color 0.3s ease;
+    flex-shrink: 0;
+}
+
+.about-carousel-bottom-line.active {
+    background-color: #E04F00;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .about-carousel-buttons {
+        flex-direction: column;
+        align-items: center;
+        gap: 16px;
+        height: auto;
+    }
+    
+    .about-carousel-button {
+        width: 100%;
+        max-width: 300px;
+    }
+    
+    .about-carousel-content {
+        grid-template-columns: 1fr;
+        gap: 32px;
+        justify-content: stretch;
+    }
+    
+    .about-carousel-heading {
+        font-size: 36px;
+        line-height: 44px;
+    }
+    
+    .about-carousel-text {
+        font-size: 16px;
+        line-height: 24px;
+    }
+    
+    .about-carousel-container {
+        padding: 0 16px;
+    }
+    
+    .about-carousel-bottom-indicators {
+        gap: 4px;
+    }
+    
+    .about-carousel-bottom-line {
+        width: 100%;
+        max-width: 100px;
+    }
+}
+
+@media (max-width: 480px) {
+    .about-carousel-heading {
+        font-size: 28px;
+        line-height: 36px;
+    }
+    
+    .about-carousel-section {
+        padding: 60px 0;
+        margin: 60px 0;
+    }
+}
+
+/* About Hero Section */
+.about-hero-section {
+    background-color: #F8F8F8;
+    padding: 80px 0;
+    width: 100%;
+    margin-top: 80px;
+}
+
+.about-hero-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 60px;
+}
+
+.about-hero-image-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.about-hero-image {
+    width: 100%;
+    max-width: 600px;
+    height: auto;
+    object-fit: contain;
+}
+
+.about-hero-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    max-width: 600px;
+}
+
+.about-hero-heading {
+    font-family: 'Figtree', sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 48px;
+    line-height: 56px;
+    letter-spacing: -0.25px;
+    color: #1D1B20;
+    margin: 0;
+    padding: 0;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+.about-hero-body {
+    font-family: 'Figtree', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 28px;
+    color: #1D1B20;
+    margin: 0;
+    padding: 0;
+}
+
+.about-hero-button {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    padding: 14px 32px;
+    background-color: #E04F00;
+    color: #FFFFFF;
+    border-radius: 8px;
+    text-decoration: none;
+    font-family: 'Figtree', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+    width: fit-content;
+    margin-top: 8px;
+}
+
+.about-hero-button:hover {
+    background-color: #C04500;
+    transform: translateY(-2px);
+    box-shadow: 0px 4px 12px rgba(224, 79, 0, 0.3);
+}
+
+.about-hero-button:active {
+    transform: translateY(0);
+}
+
+.about-hero-button-label {
+    color: #FFFFFF;
+    white-space: nowrap;
+}
+
+/* Responsive Hero Section */
+@media (max-width: 1024px) {
+    .about-hero-container {
+        flex-direction: column;
+        gap: 40px;
+    }
+    
+    .about-hero-content {
+        max-width: 100%;
+        text-align: center;
+        align-items: center;
+    }
+    
+    .about-hero-image-container {
+        order: -1;
+    }
+    
+    .about-hero-image {
+        max-width: 500px;
+    }
+}
+
+@media (max-width: 768px) {
+    .about-hero-section {
+        padding: 60px 0;
+        margin-top: 60px;
+    }
+    
+    .about-hero-container {
+        padding: 0 16px;
+        gap: 32px;
+    }
+    
+    .about-hero-content {
+        gap: 20px;
+    }
+    
+    .about-hero-heading {
+        font-size: 36px;
+        line-height: 44px;
+    }
+    
+    .about-hero-body {
+        font-size: 16px;
+        line-height: 24px;
+    }
+    
+    .about-hero-image {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .about-hero-section {
+        padding: 40px 0;
+        margin-top: 40px;
+    }
+    
+    .about-hero-heading {
+        font-size: 28px;
+        line-height: 36px;
+    }
+    
+    .about-hero-button {
+        width: 100%;
+        padding: 12px 24px;
+    }
+}
+

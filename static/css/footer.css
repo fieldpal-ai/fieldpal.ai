@@ -374,15 +374,23 @@
         flex-direction: column;
         gap: 32px;
         height: auto;
+        align-items: center;
     }
     
     .footer-bottom-content {
         width: 100%;
         text-align: center;
+        align-items: center;
     }
     
     .footer-description {
         width: 100%;
+    }
+    
+    .footer-social {
+        margin-left: 0;
+        margin-right: 0;
+        justify-content: center;
     }
 }
 
@@ -409,6 +417,13 @@
     
     .footer-social {
         width: auto;
+        margin-left: 0;
+        margin-right: 0;
+        justify-content: center;
+    }
+    
+    .footer-bottom {
+        align-items: center;
     }
 }
 

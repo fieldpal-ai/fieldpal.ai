@@ -11,3 +11,6 @@ config:
   fieldpal-ai:location: UK South
   azure-native:subscriptionId: 2713b844-4a39-4770-b97c-f51136dfe865
   azure-native:tenantId: 1132ba37-9d27-4ad0-9c4e-b1f055d64c0f
+  fieldpal-ai:sendgrid_api_key:
+    secure: AAABAMSKYhW0XGvVO7cfRWJgsEHZpf2sxwWg5e5aU+Y5RS4awbFXc5q+fLqkLy3Id4nSWEkx/Tl2PtB9nY3h42Z0x9gGsJMvZ01DGrMJIl9PMpJC+WSNbgQU+EgNxYUwx7sWwa8=
+  fieldpal-ai:web_app_name: fieldpal-website
