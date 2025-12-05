@@ -12,10 +12,18 @@
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 about-page-header" style="padding-top: 60px; padding-bottom: 0;">
     <div class="hero-copy">
         <div class="hero-copy-title">
-            about us
+            {% if content and content.header and content.header.subtitle %}
+                {{ content.header.subtitle | safe }}
+            {% else %}
+                about us
+            {% endif %}
         </div>
         <h1 class="hero-copy-heading">
-            Building AI that Works in the Real World.
+            {% if content and content.header and content.header.heading %}
+                {{ content.header.heading | safe }}
+            {% else %}
+                Building AI that Works in the Real World.
+            {% endif %}
         </h1>
     </div>
 </div>
@@ -41,24 +49,42 @@
             <div class="about-carousel-panel active" data-section="mission">
                 <h2 class="about-carousel-heading">Mission</h2>
                 <div class="about-carousel-text">
-                    <p>Give every industrial frontline worker access to AI-powered intelligence that makes their work easier, faster, and safer.</p>
-                    <p>Bridge legacy systems. Unlock trapped knowledge. Prevent failures before they happen.</p>
-                    <p>Empower field teams with the tools they need to succeed in an increasingly complex operational environment.</p>
+                    {% if content and content.mission and content.mission.text %}
+                        {% for paragraph in content.mission.text %}
+                            <p>{{ paragraph | safe }}</p>
+                        {% endfor %}
+                    {% else %}
+                        <p>Give every industrial frontline worker access to AI-powered intelligence that makes their work easier, faster, and safer.</p>
+                        <p>Bridge legacy systems. Unlock trapped knowledge. Prevent failures before they happen.</p>
+                        <p>Empower field teams with the tools they need to succeed in an increasingly complex operational environment.</p>
+                    {% endif %}
                 </div>
             </div>
             
             <div class="about-carousel-panel" data-section="vision">
                 <h2 class="about-carousel-heading">Vision</h2>
                 <div class="about-carousel-text">
-                    <p>Create a future where every field worker is empowered with real-time intelligence, where operations are predictive not reactive, and where decades of expertise are preserved and accessible instantly.</p>
-                    <p>Make industrial operations smarter, safer, and more efficient through purpose-built AI that actually works in the real world.</p>
+                    {% if content and content.vision and content.vision.text %}
+                        {% for paragraph in content.vision.text %}
+                            <p>{{ paragraph | safe }}</p>
+                        {% endfor %}
+                    {% else %}
+                        <p>Create a future where every field worker is empowered with real-time intelligence, where operations are predictive not reactive, and where decades of expertise are preserved and accessible instantly.</p>
+                        <p>Make industrial operations smarter, safer, and more efficient through purpose-built AI that actually works in the real world.</p>
+                    {% endif %}
                 </div>
             </div>
             
             <div class="about-carousel-panel" data-section="enterprise">
                 <h2 class="about-carousel-heading">Enterprise</h2>
                 <div class="about-carousel-text">
-                    <p>We forecast equipment failures 7-30 days in advance, allowing you to shift from reactive firefighting to proactive prevention. Our customers see an average 40% reduction in unplanned downtime.</p>
+                    {% if content and content.enterprise and content.enterprise.text %}
+                        {% for paragraph in content.enterprise.text %}
+                            <p>{{ paragraph | safe }}</p>
+                        {% endfor %}
+                    {% else %}
+                        <p>We forecast equipment failures 7-30 days in advance, allowing you to shift from reactive firefighting to proactive prevention. Our customers see an average 40% reduction in unplanned downtime.</p>
+                    {% endif %}
                 </div>
             </div>
         </div>
@@ -80,16 +106,34 @@
         </div>
         <div class="about-hero-content">
             <div class="hero-copy-title">
-                Built for frontline operations
+                {% if content and content.hero and content.hero.subtitle %}
+                    {{ content.hero.subtitle | safe }}
+                {% else %}
+                    Built for frontline operations
+                {% endif %}
             </div>
             <h2 class="about-hero-heading">
-                Transform the way your teams work
+                {% if content and content.hero and content.hero.heading %}
+                    {{ content.hero.heading | safe }}
+                {% else %}
+                    Transform the way your teams work
+                {% endif %}
             </h2>
             <p class="about-hero-body">
-                Whether you're exploring AI for the first time or scaling existing systems, we'll help you map the right solution for your operation.
+                {% if content and content.hero and content.hero.body %}
+                    {{ content.hero.body | safe }}
+                {% else %}
+                    Whether you're exploring AI for the first time or scaling existing systems, we'll help you map the right solution for your operation.
+                {% endif %}
             </p>
             <a href="/contact" class="about-hero-button">
-                <span class="about-hero-button-label">Get in touch</span>
+                <span class="about-hero-button-label">
+                    {% if content and content.hero and content.hero.button_text %}
+                        {{ content.hero.button_text }}
+                    {% else %}
+                        Get in touch
+                    {% endif %}
+                </span>
             </a>
         </div>
     </div>

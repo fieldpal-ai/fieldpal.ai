@@ -9,39 +9,69 @@
     <div class="mb-6">
         <h2 class="text-xl font-semibold text-gray-800 mb-4">Homepage Sections</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            <div class="border rounded-lg p-4 hover:bg-gray-50 cursor-pointer" onclick="loadSection('hero')">
+            <div class="border rounded-lg p-4 hover:bg-gray-50 cursor-pointer" onclick="loadSection('home', 'hero')">
                 <h3 class="text-lg font-semibold mb-2">Hero Section</h3>
                 <p class="text-sm text-gray-600">Main title and subtitle</p>
             </div>
             
-            <div class="border rounded-lg p-4 hover:bg-gray-50 cursor-pointer" onclick="loadSection('stats')">
+            <div class="border rounded-lg p-4 hover:bg-gray-50 cursor-pointer" onclick="loadSection('home', 'stats')">
                 <h3 class="text-lg font-semibold mb-2">Stats Section</h3>
                 <p class="text-sm text-gray-600">Key statistics</p>
             </div>
             
-            <div class="border rounded-lg p-4 hover:bg-gray-50 cursor-pointer" onclick="loadSection('what-we-do')">
+            <div class="border rounded-lg p-4 hover:bg-gray-50 cursor-pointer" onclick="loadSection('home', 'what-we-do')">
                 <h3 class="text-lg font-semibold mb-2">What We Do</h3>
                 <p class="text-sm text-gray-600">Main feature section</p>
             </div>
             
-            <div class="border rounded-lg p-4 hover:bg-gray-50 cursor-pointer" onclick="loadSection('problem')">
+            <div class="border rounded-lg p-4 hover:bg-gray-50 cursor-pointer" onclick="loadSection('home', 'problem')">
                 <h3 class="text-lg font-semibold mb-2">Problem Section</h3>
                 <p class="text-sm text-gray-600">The challenge heading</p>
             </div>
             
-            <div class="border rounded-lg p-4 hover:bg-gray-50 cursor-pointer" onclick="loadSection('challenges')">
+            <div class="border rounded-lg p-4 hover:bg-gray-50 cursor-pointer" onclick="loadSection('home', 'challenges')">
                 <h3 class="text-lg font-semibold mb-2">Challenges Features</h3>
                 <p class="text-sm text-gray-600">4 challenge cards</p>
             </div>
             
-            <div class="border rounded-lg p-4 hover:bg-gray-50 cursor-pointer" onclick="loadSection('capture-module')">
+            <div class="border rounded-lg p-4 hover:bg-gray-50 cursor-pointer" onclick="loadSection('home', 'capture-module')">
                 <h3 class="text-lg font-semibold mb-2">Capture Module</h3>
                 <p class="text-sm text-gray-600">Product features</p>
             </div>
             
-            <div class="border rounded-lg p-4 hover:bg-gray-50 cursor-pointer" onclick="loadSection('faq')">
+            <div class="border rounded-lg p-4 hover:bg-gray-50 cursor-pointer" onclick="loadSection('home', 'faq')">
                 <h3 class="text-lg font-semibold mb-2">FAQ Section</h3>
                 <p class="text-sm text-gray-600">Questions and answers</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="mb-6">
+        <h2 class="text-xl font-semibold text-gray-800 mb-4">About Page Sections</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div class="border rounded-lg p-4 hover:bg-gray-50 cursor-pointer" onclick="loadSection('about', 'header')">
+                <h3 class="text-lg font-semibold mb-2">About Header</h3>
+                <p class="text-sm text-gray-600">Page title and heading</p>
+            </div>
+            
+            <div class="border rounded-lg p-4 hover:bg-gray-50 cursor-pointer" onclick="loadSection('about', 'mission')">
+                <h3 class="text-lg font-semibold mb-2">Mission</h3>
+                <p class="text-sm text-gray-600">Mission statement text</p>
+            </div>
+            
+            <div class="border rounded-lg p-4 hover:bg-gray-50 cursor-pointer" onclick="loadSection('about', 'vision')">
+                <h3 class="text-lg font-semibold mb-2">Vision</h3>
+                <p class="text-sm text-gray-600">Vision statement text</p>
+            </div>
+            
+            <div class="border rounded-lg p-4 hover:bg-gray-50 cursor-pointer" onclick="loadSection('about', 'enterprise')">
+                <h3 class="text-lg font-semibold mb-2">Enterprise</h3>
+                <p class="text-sm text-gray-600">Enterprise section text</p>
+            </div>
+            
+            <div class="border rounded-lg p-4 hover:bg-gray-50 cursor-pointer" onclick="loadSection('about', 'hero')">
+                <h3 class="text-lg font-semibold mb-2">Hero Section</h3>
+                <p class="text-sm text-gray-600">Bottom hero with image</p>
             </div>
         </div>
     </div>
@@ -68,11 +98,12 @@
 </div>
 
 <script>
+let currentPage = 'home';
 let currentSection = null;
 let currentData = {};
 
-// Section configurations
-const sectionConfigs = {
+// Section configurations for home page
+const homeSectionConfigs = {
     'hero': {
         title: 'Hero Section',
         description: 'Main title and subtitle at the top of the homepage',
@@ -179,9 +210,63 @@ const sectionConfigs = {
     }
 };
 
-async function loadSection(section) {
+// Section configurations for about page
+const aboutSectionConfigs = {
+    'header': {
+        title: 'About Header',
+        description: 'Page title and main heading',
+        fields: [
+            { key: 'subtitle', label: 'Subtitle', type: 'text', placeholder: 'about us' },
+            { key: 'heading', label: 'Main Heading', type: 'textarea', placeholder: 'Building AI that Works in the Real World.' }
+        ]
+    },
+    'mission': {
+        title: 'Mission Section',
+        description: 'Mission statement text (one paragraph per line)',
+        fields: [
+            { key: 'text', label: 'Mission Text (one paragraph per line)', type: 'textarea', placeholder: 'Give every industrial frontline worker access to AI-powered intelligence that makes their work easier, faster, and safer.\nBridge legacy systems. Unlock trapped knowledge. Prevent failures before they happen.\nEmpower field teams with the tools they need to succeed in an increasingly complex operational environment.', rows: 6 }
+        ]
+    },
+    'vision': {
+        title: 'Vision Section',
+        description: 'Vision statement text (one paragraph per line)',
+        fields: [
+            { key: 'text', label: 'Vision Text (one paragraph per line)', type: 'textarea', placeholder: 'Create a future where every field worker is empowered with real-time intelligence, where operations are predictive not reactive, and where decades of expertise are preserved and accessible instantly.\nMake industrial operations smarter, safer, and more efficient through purpose-built AI that actually works in the real world.', rows: 5 }
+        ]
+    },
+    'enterprise': {
+        title: 'Enterprise Section',
+        description: 'Enterprise section text (one paragraph per line)',
+        fields: [
+            { key: 'text', label: 'Enterprise Text (one paragraph per line)', type: 'textarea', placeholder: 'We forecast equipment failures 7-30 days in advance, allowing you to shift from reactive firefighting to proactive prevention. Our customers see an average 40% reduction in unplanned downtime.', rows: 4 }
+        ]
+    },
+    'hero': {
+        title: 'About Hero Section',
+        description: 'Bottom hero section with image',
+        fields: [
+            { key: 'subtitle', label: 'Subtitle', type: 'text', placeholder: 'Built for frontline operations' },
+            { key: 'heading', label: 'Heading', type: 'textarea', placeholder: 'Transform the way your teams work' },
+            { key: 'body', label: 'Body Text', type: 'textarea', placeholder: 'Whether you\'re exploring AI for the first time or scaling existing systems, we\'ll help you map the right solution for your operation.', rows: 3 },
+            { key: 'button_text', label: 'Button Text', type: 'text', placeholder: 'Get in touch' }
+        ]
+    }
+};
+
+// Get section config based on page
+function getSectionConfig(page, section) {
+    if (page === 'home') {
+        return homeSectionConfigs[section];
+    } else if (page === 'about') {
+        return aboutSectionConfigs[section];
+    }
+    return null;
+}
+
+async function loadSection(page, section) {
+    currentPage = page || 'home';
     currentSection = section;
-    const config = sectionConfigs[section];
+    const config = getSectionConfig(currentPage, section);
     
     if (!config) {
         alert('Unknown section: ' + section);
@@ -194,7 +279,7 @@ async function loadSection(section) {
     
     // Load current content
     try {
-        const response = await fetch(`/api/content/home?section=${section}`, {
+        const response = await fetch(`/api/content/${currentPage}?section=${section}`, {
             credentials: 'include'
         });
         
@@ -222,7 +307,7 @@ async function loadSection(section) {
             let input;
             if (field.type === 'textarea') {
                 input = document.createElement('textarea');
-                input.rows = field.key.includes('body') || field.key.includes('answer') ? 4 : 2;
+                input.rows = field.rows || (field.key.includes('body') || field.key.includes('answer') || field.key.includes('text') ? 4 : 2);
             } else {
                 input = document.createElement('input');
                 input.type = field.type;
@@ -233,7 +318,15 @@ async function loadSection(section) {
             input.placeholder = field.placeholder;
             
             // Get value from nested data structure
-            const value = getNestedValue(data, field.key);
+            let value = getNestedValue(data, field.key);
+            
+            // Special handling for mission/vision/enterprise text arrays
+            if (field.key === 'text' && (section === 'mission' || section === 'vision' || section === 'enterprise')) {
+                if (Array.isArray(value)) {
+                    value = value.join('\n');
+                }
+            }
+            
             if (value !== undefined && value !== null) {
                 input.value = value;
             }
@@ -280,9 +373,14 @@ function setNestedValue(obj, path, value) {
 }
 
 async function saveSection() {
-    if (!currentSection) return;
+    if (!currentSection || !currentPage) return;
     
-    const config = sectionConfigs[currentSection];
+    const config = getSectionConfig(currentPage, currentSection);
+    if (!config) {
+        alert('Unknown section configuration');
+        return;
+    }
+    
     const data = {};
     
     // Collect form values
@@ -294,6 +392,9 @@ async function saveSection() {
             
             // Handle special cases
             if (field.key === 'list_items') {
+                value = value.split('\n').filter(line => line.trim());
+            } else if (field.key === 'text' && (currentSection === 'mission' || currentSection === 'vision' || currentSection === 'enterprise')) {
+                // Split text into array of paragraphs
                 value = value.split('\n').filter(line => line.trim());
             }
             
@@ -311,7 +412,7 @@ async function saveSection() {
             headers['Authorization'] = `Bearer ${token}`;
         }
         
-        const response = await fetch(`/api/content/home?section=${currentSection}`, {
+        const response = await fetch(`/api/content/${currentPage}?section=${currentSection}`, {
             method: 'PUT',
             headers: headers,
             credentials: 'include',
